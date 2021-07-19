@@ -1,0 +1,6 @@
+.vscode
+*.py[c,o]
+.tox
+.mypy
+.mypy_cache
+

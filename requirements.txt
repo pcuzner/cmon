@@ -1,0 +1,5 @@
+urwid>=2.1.2
+pyyaml>=5.4.1
+requests>=2.25
+humanize>=0.5.1
+urllib3>=1.25

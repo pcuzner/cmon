@@ -1,0 +1,8 @@
+---
+ceph_url: http://192.168.122.92:9283/metrics
+prometheus_url: http://192.168.122.92:9095
+
+#panel_ioload: true
+#panel_alerts: false
+#panel_pools: false
+#panel_rbds: false

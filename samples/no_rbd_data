@@ -1,0 +1,1420 @@
+
+# HELP ceph_health_status Cluster health status
+# TYPE ceph_health_status untyped
+ceph_health_status 0.0
+# HELP ceph_mon_quorum_status Monitors in quorum
+# TYPE ceph_mon_quorum_status gauge
+ceph_mon_quorum_status{ceph_daemon="mon.rh8ceph1"} 1.0
+# HELP ceph_fs_metadata FS Metadata
+# TYPE ceph_fs_metadata untyped
+# HELP ceph_mds_metadata MDS Metadata
+# TYPE ceph_mds_metadata untyped
+# HELP ceph_mon_metadata MON Metadata
+# TYPE ceph_mon_metadata untyped
+ceph_mon_metadata{ceph_daemon="mon.rh8ceph1",hostname="rh8ceph1",public_addr="192.168.122.92",rank="0",ceph_version="ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)"} 1.0
+# HELP ceph_mgr_metadata MGR metadata
+# TYPE ceph_mgr_metadata gauge
+ceph_mgr_metadata{ceph_daemon="mgr.rh8ceph1.lwykmw",hostname="rh8ceph1",ceph_version="ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)"} 1.0
+# HELP ceph_mgr_status MGR status (0=standby, 1=active)
+# TYPE ceph_mgr_status gauge
+ceph_mgr_status{ceph_daemon="mgr.rh8ceph1.lwykmw"} 1.0
+# HELP ceph_mgr_module_status MGR module status (0=disabled, 1=enabled, 2=auto-enabled)
+# TYPE ceph_mgr_module_status gauge
+ceph_mgr_module_status{name="alerts"} 0.0
+ceph_mgr_module_status{name="balancer"} 2.0
+ceph_mgr_module_status{name="cephadm"} 1.0
+ceph_mgr_module_status{name="crash"} 2.0
+ceph_mgr_module_status{name="dashboard"} 0.0
+ceph_mgr_module_status{name="devicehealth"} 2.0
+ceph_mgr_module_status{name="diskprediction_local"} 0.0
+ceph_mgr_module_status{name="influx"} 0.0
+ceph_mgr_module_status{name="insights"} 0.0
+ceph_mgr_module_status{name="iostat"} 1.0
+ceph_mgr_module_status{name="k8sevents"} 0.0
+ceph_mgr_module_status{name="localpool"} 0.0
+ceph_mgr_module_status{name="mds_autoscaler"} 0.0
+ceph_mgr_module_status{name="mirroring"} 0.0
+ceph_mgr_module_status{name="orchestrator"} 2.0
+ceph_mgr_module_status{name="osd_support"} 0.0
+ceph_mgr_module_status{name="pg_autoscaler"} 2.0
+ceph_mgr_module_status{name="progress"} 2.0
+ceph_mgr_module_status{name="prometheus"} 1.0
+ceph_mgr_module_status{name="rbd_support"} 2.0
+ceph_mgr_module_status{name="restful"} 1.0
+ceph_mgr_module_status{name="rook"} 0.0
+ceph_mgr_module_status{name="selftest"} 0.0
+ceph_mgr_module_status{name="snap_schedule"} 0.0
+ceph_mgr_module_status{name="stats"} 0.0
+ceph_mgr_module_status{name="status"} 2.0
+ceph_mgr_module_status{name="telegraf"} 0.0
+ceph_mgr_module_status{name="telemetry"} 2.0
+ceph_mgr_module_status{name="test_orchestrator"} 0.0
+ceph_mgr_module_status{name="volumes"} 2.0
+ceph_mgr_module_status{name="zabbix"} 0.0
+# HELP ceph_mgr_module_can_run MGR module runnable state i.e. can it run (0=no, 1=yes)
+# TYPE ceph_mgr_module_can_run gauge
+ceph_mgr_module_can_run{name="alerts"} 1.0
+ceph_mgr_module_can_run{name="balancer"} 1.0
+ceph_mgr_module_can_run{name="cephadm"} 1.0
+ceph_mgr_module_can_run{name="crash"} 1.0
+ceph_mgr_module_can_run{name="dashboard"} 1.0
+ceph_mgr_module_can_run{name="devicehealth"} 1.0
+ceph_mgr_module_can_run{name="diskprediction_local"} 1.0
+ceph_mgr_module_can_run{name="influx"} 0.0
+ceph_mgr_module_can_run{name="insights"} 1.0
+ceph_mgr_module_can_run{name="iostat"} 1.0
+ceph_mgr_module_can_run{name="k8sevents"} 1.0
+ceph_mgr_module_can_run{name="localpool"} 1.0
+ceph_mgr_module_can_run{name="mds_autoscaler"} 1.0
+ceph_mgr_module_can_run{name="mirroring"} 1.0
+ceph_mgr_module_can_run{name="orchestrator"} 1.0
+ceph_mgr_module_can_run{name="osd_support"} 1.0
+ceph_mgr_module_can_run{name="pg_autoscaler"} 1.0
+ceph_mgr_module_can_run{name="progress"} 1.0
+ceph_mgr_module_can_run{name="prometheus"} 1.0
+ceph_mgr_module_can_run{name="rbd_support"} 1.0
+ceph_mgr_module_can_run{name="restful"} 1.0
+ceph_mgr_module_can_run{name="rook"} 1.0
+ceph_mgr_module_can_run{name="selftest"} 1.0
+ceph_mgr_module_can_run{name="snap_schedule"} 1.0
+ceph_mgr_module_can_run{name="stats"} 1.0
+ceph_mgr_module_can_run{name="status"} 1.0
+ceph_mgr_module_can_run{name="telegraf"} 1.0
+ceph_mgr_module_can_run{name="telemetry"} 1.0
+ceph_mgr_module_can_run{name="test_orchestrator"} 1.0
+ceph_mgr_module_can_run{name="volumes"} 1.0
+ceph_mgr_module_can_run{name="zabbix"} 1.0
+# HELP ceph_osd_metadata OSD Metadata
+# TYPE ceph_osd_metadata untyped
+ceph_osd_metadata{back_iface="eth0",ceph_daemon="osd.0",cluster_addr="192.168.122.92",device_class="hdd",front_iface="eth0",hostname="rh8ceph1",objectstore="bluestore",public_addr="192.168.122.92",ceph_version="ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)"} 1.0
+ceph_osd_metadata{back_iface="eth0",ceph_daemon="osd.1",cluster_addr="192.168.122.92",device_class="hdd",front_iface="eth0",hostname="rh8ceph1",objectstore="bluestore",public_addr="192.168.122.92",ceph_version="ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)"} 1.0
+ceph_osd_metadata{back_iface="eth0",ceph_daemon="osd.2",cluster_addr="192.168.122.92",device_class="hdd",front_iface="eth0",hostname="rh8ceph1",objectstore="bluestore",public_addr="192.168.122.92",ceph_version="ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)"} 1.0
+# HELP ceph_disk_occupation Associate Ceph daemon with disk used
+# TYPE ceph_disk_occupation untyped
+ceph_disk_occupation{ceph_daemon="osd.0",device="/dev/dm-0",db_device="",wal_device="",instance="rh8ceph1",devices="vdb",device_ids="N/A"} 1.0
+ceph_disk_occupation{ceph_daemon="osd.1",device="/dev/dm-2",db_device="",wal_device="",instance="rh8ceph1",devices="vdc",device_ids="N/A"} 1.0
+ceph_disk_occupation{ceph_daemon="osd.2",device="/dev/dm-1",db_device="",wal_device="",instance="rh8ceph1",devices="vdd",device_ids="N/A"} 1.0
+# HELP ceph_pool_metadata POOL Metadata
+# TYPE ceph_pool_metadata untyped
+ceph_pool_metadata{pool_id="1",name="device_health_metrics"} 1.0
+ceph_pool_metadata{pool_id="2",name="rbd"} 1.0
+# HELP ceph_rgw_metadata RGW Metadata
+# TYPE ceph_rgw_metadata untyped
+# HELP ceph_rbd_mirror_metadata RBD Mirror Metadata
+# TYPE ceph_rbd_mirror_metadata untyped
+ceph_rbd_mirror_metadata{ceph_daemon="rbd-mirror.44157",id="rh8ceph1.diybrk",instance_id="44157",hostname="rh8ceph1",ceph_version="ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)"} 1.0
+# HELP ceph_pg_total PG Total Count per Pool
+# TYPE ceph_pg_total gauge
+ceph_pg_total{pool_id="1"} 1.0
+ceph_pg_total{pool_id="2"} 32.0
+# HELP ceph_osd_flag_noup OSD Flag noup
+# TYPE ceph_osd_flag_noup untyped
+ceph_osd_flag_noup 0.0
+# HELP ceph_osd_flag_nodown OSD Flag nodown
+# TYPE ceph_osd_flag_nodown untyped
+ceph_osd_flag_nodown 0.0
+# HELP ceph_osd_flag_noout OSD Flag noout
+# TYPE ceph_osd_flag_noout untyped
+ceph_osd_flag_noout 0.0
+# HELP ceph_osd_flag_noin OSD Flag noin
+# TYPE ceph_osd_flag_noin untyped
+ceph_osd_flag_noin 0.0
+# HELP ceph_osd_flag_nobackfill OSD Flag nobackfill
+# TYPE ceph_osd_flag_nobackfill untyped
+ceph_osd_flag_nobackfill 0.0
+# HELP ceph_osd_flag_norebalance OSD Flag norebalance
+# TYPE ceph_osd_flag_norebalance untyped
+ceph_osd_flag_norebalance 0.0
+# HELP ceph_osd_flag_norecover OSD Flag norecover
+# TYPE ceph_osd_flag_norecover untyped
+ceph_osd_flag_norecover 0.0
+# HELP ceph_osd_flag_noscrub OSD Flag noscrub
+# TYPE ceph_osd_flag_noscrub untyped
+ceph_osd_flag_noscrub 0.0
+# HELP ceph_osd_flag_nodeep_scrub OSD Flag nodeep-scrub
+# TYPE ceph_osd_flag_nodeep_scrub untyped
+ceph_osd_flag_nodeep_scrub 0.0
+# HELP ceph_osd_weight OSD status weight
+# TYPE ceph_osd_weight untyped
+ceph_osd_weight{ceph_daemon="osd.0"} 1.0
+ceph_osd_weight{ceph_daemon="osd.1"} 1.0
+ceph_osd_weight{ceph_daemon="osd.2"} 1.0
+# HELP ceph_osd_up OSD status up
+# TYPE ceph_osd_up untyped
+ceph_osd_up{ceph_daemon="osd.0"} 1.0
+ceph_osd_up{ceph_daemon="osd.1"} 1.0
+ceph_osd_up{ceph_daemon="osd.2"} 1.0
+# HELP ceph_osd_in OSD status in
+# TYPE ceph_osd_in untyped
+ceph_osd_in{ceph_daemon="osd.0"} 1.0
+ceph_osd_in{ceph_daemon="osd.1"} 1.0
+ceph_osd_in{ceph_daemon="osd.2"} 1.0
+# HELP ceph_osd_apply_latency_ms OSD stat apply_latency_ms
+# TYPE ceph_osd_apply_latency_ms gauge
+ceph_osd_apply_latency_ms{ceph_daemon="osd.2"} 0.0
+ceph_osd_apply_latency_ms{ceph_daemon="osd.0"} 0.0
+ceph_osd_apply_latency_ms{ceph_daemon="osd.1"} 0.0
+# HELP ceph_osd_commit_latency_ms OSD stat commit_latency_ms
+# TYPE ceph_osd_commit_latency_ms gauge
+ceph_osd_commit_latency_ms{ceph_daemon="osd.2"} 0.0
+ceph_osd_commit_latency_ms{ceph_daemon="osd.0"} 0.0
+ceph_osd_commit_latency_ms{ceph_daemon="osd.1"} 0.0
+# HELP ceph_pool_recovering_objects_per_sec OSD pool stats: recovering_objects_per_sec
+# TYPE ceph_pool_recovering_objects_per_sec gauge
+ceph_pool_recovering_objects_per_sec{pool_id="1"} 0.0
+ceph_pool_recovering_objects_per_sec{pool_id="2"} 0.0
+# HELP ceph_pool_recovering_bytes_per_sec OSD pool stats: recovering_bytes_per_sec
+# TYPE ceph_pool_recovering_bytes_per_sec gauge
+ceph_pool_recovering_bytes_per_sec{pool_id="1"} 0.0
+ceph_pool_recovering_bytes_per_sec{pool_id="2"} 0.0
+# HELP ceph_pool_recovering_keys_per_sec OSD pool stats: recovering_keys_per_sec
+# TYPE ceph_pool_recovering_keys_per_sec gauge
+ceph_pool_recovering_keys_per_sec{pool_id="1"} 0.0
+ceph_pool_recovering_keys_per_sec{pool_id="2"} 0.0
+# HELP ceph_pool_num_objects_recovered OSD pool stats: num_objects_recovered
+# TYPE ceph_pool_num_objects_recovered gauge
+ceph_pool_num_objects_recovered{pool_id="1"} 0.0
+ceph_pool_num_objects_recovered{pool_id="2"} 0.0
+# HELP ceph_pool_num_bytes_recovered OSD pool stats: num_bytes_recovered
+# TYPE ceph_pool_num_bytes_recovered gauge
+ceph_pool_num_bytes_recovered{pool_id="1"} 0.0
+ceph_pool_num_bytes_recovered{pool_id="2"} 0.0
+# HELP ceph_pg_active PG active per pool
+# TYPE ceph_pg_active gauge
+ceph_pg_active{pool_id="1"} 1.0
+ceph_pg_active{pool_id="2"} 32.0
+# HELP ceph_pg_clean PG clean per pool
+# TYPE ceph_pg_clean gauge
+ceph_pg_clean{pool_id="1"} 1.0
+ceph_pg_clean{pool_id="2"} 32.0
+# HELP ceph_pg_down PG down per pool
+# TYPE ceph_pg_down gauge
+# HELP ceph_pg_recovery_unfound PG recovery_unfound per pool
+# TYPE ceph_pg_recovery_unfound gauge
+# HELP ceph_pg_backfill_unfound PG backfill_unfound per pool
+# TYPE ceph_pg_backfill_unfound gauge
+# HELP ceph_pg_scrubbing PG scrubbing per pool
+# TYPE ceph_pg_scrubbing gauge
+# HELP ceph_pg_degraded PG degraded per pool
+# TYPE ceph_pg_degraded gauge
+# HELP ceph_pg_inconsistent PG inconsistent per pool
+# TYPE ceph_pg_inconsistent gauge
+# HELP ceph_pg_peering PG peering per pool
+# TYPE ceph_pg_peering gauge
+# HELP ceph_pg_repair PG repair per pool
+# TYPE ceph_pg_repair gauge
+# HELP ceph_pg_recovering PG recovering per pool
+# TYPE ceph_pg_recovering gauge
+# HELP ceph_pg_forced_recovery PG forced_recovery per pool
+# TYPE ceph_pg_forced_recovery gauge
+# HELP ceph_pg_backfill_wait PG backfill_wait per pool
+# TYPE ceph_pg_backfill_wait gauge
+# HELP ceph_pg_incomplete PG incomplete per pool
+# TYPE ceph_pg_incomplete gauge
+# HELP ceph_pg_stale PG stale per pool
+# TYPE ceph_pg_stale gauge
+# HELP ceph_pg_remapped PG remapped per pool
+# TYPE ceph_pg_remapped gauge
+# HELP ceph_pg_deep PG deep per pool
+# TYPE ceph_pg_deep gauge
+# HELP ceph_pg_backfilling PG backfilling per pool
+# TYPE ceph_pg_backfilling gauge
+# HELP ceph_pg_forced_backfill PG forced_backfill per pool
+# TYPE ceph_pg_forced_backfill gauge
+# HELP ceph_pg_backfill_toofull PG backfill_toofull per pool
+# TYPE ceph_pg_backfill_toofull gauge
+# HELP ceph_pg_recovery_wait PG recovery_wait per pool
+# TYPE ceph_pg_recovery_wait gauge
+# HELP ceph_pg_recovery_toofull PG recovery_toofull per pool
+# TYPE ceph_pg_recovery_toofull gauge
+# HELP ceph_pg_undersized PG undersized per pool
+# TYPE ceph_pg_undersized gauge
+# HELP ceph_pg_activating PG activating per pool
+# TYPE ceph_pg_activating gauge
+# HELP ceph_pg_peered PG peered per pool
+# TYPE ceph_pg_peered gauge
+# HELP ceph_pg_snaptrim PG snaptrim per pool
+# TYPE ceph_pg_snaptrim gauge
+# HELP ceph_pg_snaptrim_wait PG snaptrim_wait per pool
+# TYPE ceph_pg_snaptrim_wait gauge
+# HELP ceph_pg_snaptrim_error PG snaptrim_error per pool
+# TYPE ceph_pg_snaptrim_error gauge
+# HELP ceph_pg_creating PG creating per pool
+# TYPE ceph_pg_creating gauge
+# HELP ceph_pg_unknown PG unknown per pool
+# TYPE ceph_pg_unknown gauge
+# HELP ceph_pg_premerge PG premerge per pool
+# TYPE ceph_pg_premerge gauge
+# HELP ceph_pg_failed_repair PG failed_repair per pool
+# TYPE ceph_pg_failed_repair gauge
+# HELP ceph_pg_laggy PG laggy per pool
+# TYPE ceph_pg_laggy gauge
+# HELP ceph_pg_wait PG wait per pool
+# TYPE ceph_pg_wait gauge
+# HELP ceph_cluster_total_bytes DF total_bytes
+# TYPE ceph_cluster_total_bytes gauge
+ceph_cluster_total_bytes 3298522300416.0
+# HELP ceph_cluster_total_used_bytes DF total_used_bytes
+# TYPE ceph_cluster_total_used_bytes gauge
+ceph_cluster_total_used_bytes 7753539584.0
+# HELP ceph_cluster_total_used_raw_bytes DF total_used_raw_bytes
+# TYPE ceph_cluster_total_used_raw_bytes gauge
+ceph_cluster_total_used_raw_bytes 7753539584.0
+# HELP ceph_pool_max_avail DF pool max_avail
+# TYPE ceph_pool_max_avail gauge
+ceph_pool_max_avail{pool_id="1"} 1041725718528.0
+ceph_pool_max_avail{pool_id="2"} 1041725718528.0
+# HELP ceph_pool_stored DF pool stored
+# TYPE ceph_pool_stored gauge
+ceph_pool_stored{pool_id="1"} 0.0
+ceph_pool_stored{pool_id="2"} 2278828181.0
+# HELP ceph_pool_stored_raw DF pool stored_raw
+# TYPE ceph_pool_stored_raw gauge
+ceph_pool_stored_raw{pool_id="1"} 0.0
+ceph_pool_stored_raw{pool_id="2"} 6836485120.0
+# HELP ceph_pool_objects DF pool objects
+# TYPE ceph_pool_objects gauge
+ceph_pool_objects{pool_id="1"} 0.0
+ceph_pool_objects{pool_id="2"} 599.0
+# HELP ceph_pool_dirty DF pool dirty
+# TYPE ceph_pool_dirty gauge
+ceph_pool_dirty{pool_id="1"} 0.0
+ceph_pool_dirty{pool_id="2"} 599.0
+# HELP ceph_pool_quota_bytes DF pool quota_bytes
+# TYPE ceph_pool_quota_bytes gauge
+ceph_pool_quota_bytes{pool_id="1"} 0.0
+ceph_pool_quota_bytes{pool_id="2"} 0.0
+# HELP ceph_pool_quota_objects DF pool quota_objects
+# TYPE ceph_pool_quota_objects gauge
+ceph_pool_quota_objects{pool_id="1"} 0.0
+ceph_pool_quota_objects{pool_id="2"} 0.0
+# HELP ceph_pool_rd DF pool rd
+# TYPE ceph_pool_rd gauge
+ceph_pool_rd{pool_id="1"} 0.0
+ceph_pool_rd{pool_id="2"} 14056195.0
+# HELP ceph_pool_rd_bytes DF pool rd_bytes
+# TYPE ceph_pool_rd_bytes gauge
+ceph_pool_rd_bytes{pool_id="1"} 0.0
+ceph_pool_rd_bytes{pool_id="2"} 50727089152.0
+# HELP ceph_pool_wr DF pool wr
+# TYPE ceph_pool_wr gauge
+ceph_pool_wr{pool_id="1"} 0.0
+ceph_pool_wr{pool_id="2"} 167719.0
+# HELP ceph_pool_wr_bytes DF pool wr_bytes
+# TYPE ceph_pool_wr_bytes gauge
+ceph_pool_wr_bytes{pool_id="1"} 0.0
+ceph_pool_wr_bytes{pool_id="2"} 2487049216.0
+# HELP ceph_pool_compress_bytes_used DF pool compress_bytes_used
+# TYPE ceph_pool_compress_bytes_used gauge
+ceph_pool_compress_bytes_used{pool_id="1"} 0.0
+ceph_pool_compress_bytes_used{pool_id="2"} 0.0
+# HELP ceph_pool_compress_under_bytes DF pool compress_under_bytes
+# TYPE ceph_pool_compress_under_bytes gauge
+ceph_pool_compress_under_bytes{pool_id="1"} 0.0
+ceph_pool_compress_under_bytes{pool_id="2"} 0.0
+# HELP ceph_num_objects_degraded Number of degraded objects
+# TYPE ceph_num_objects_degraded gauge
+ceph_num_objects_degraded 0.0
+# HELP ceph_num_objects_misplaced Number of misplaced objects
+# TYPE ceph_num_objects_misplaced gauge
+ceph_num_objects_misplaced 0.0
+# HELP ceph_num_objects_unfound Number of unfound objects
+# TYPE ceph_num_objects_unfound gauge
+ceph_num_objects_unfound 0.0
+# HELP ceph_healthcheck_slow_ops OSD or Monitor requests taking a long time to process
+# TYPE ceph_healthcheck_slow_ops gauge
+ceph_healthcheck_slow_ops 0.0
+# HELP ceph__cache_bytes current memory available for caches.
+# TYPE ceph__cache_bytes gauge
+ceph__cache_bytes{ceph_daemon="mon.rh8ceph1"} 1020054731.0
+ceph__cache_bytes{ceph_daemon="rbd-mirror.44157"} 2845415832.0
+# HELP ceph__heap_bytes aggregate bytes in use by the heap
+# TYPE ceph__heap_bytes gauge
+ceph__heap_bytes{ceph_daemon="mon.rh8ceph1"} 1008271360.0
+ceph__heap_bytes{ceph_daemon="rbd-mirror.44157"} 54034432.0
+# HELP ceph__mapped_bytes total bytes mapped by the process
+# TYPE ceph__mapped_bytes gauge
+ceph__mapped_bytes{ceph_daemon="mon.rh8ceph1"} 965206016.0
+ceph__mapped_bytes{ceph_daemon="rbd-mirror.44157"} 49889280.0
+# HELP ceph__target_bytes target process memory usage in bytes
+# TYPE ceph__target_bytes gauge
+ceph__target_bytes{ceph_daemon="mon.rh8ceph1"} 2147483648.0
+ceph__target_bytes{ceph_daemon="rbd-mirror.44157"} 4294967296.0
+# HELP ceph__unmapped_bytes unmapped bytes that the kernel has yet to reclaimed
+# TYPE ceph__unmapped_bytes gauge
+ceph__unmapped_bytes{ceph_daemon="mon.rh8ceph1"} 43065344.0
+ceph__unmapped_bytes{ceph_daemon="rbd-mirror.44157"} 4145152.0
+# HELP ceph_mon_election_call Elections started
+# TYPE ceph_mon_election_call counter
+ceph_mon_election_call{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_mon_election_lose Elections lost
+# TYPE ceph_mon_election_lose counter
+ceph_mon_election_lose{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_mon_election_win Elections won
+# TYPE ceph_mon_election_win counter
+ceph_mon_election_win{ceph_daemon="mon.rh8ceph1"} 1.0
+# HELP ceph_mon_num_elections Elections participated in
+# TYPE ceph_mon_num_elections counter
+ceph_mon_num_elections{ceph_daemon="mon.rh8ceph1"} 1.0
+# HELP ceph_mon_num_sessions Open sessions
+# TYPE ceph_mon_num_sessions gauge
+ceph_mon_num_sessions{ceph_daemon="mon.rh8ceph1"} 11.0
+# HELP ceph_mon_session_add Created sessions
+# TYPE ceph_mon_session_add counter
+ceph_mon_session_add{ceph_daemon="mon.rh8ceph1"} 2.0
+# HELP ceph_mon_session_rm Removed sessions
+# TYPE ceph_mon_session_rm counter
+ceph_mon_session_rm{ceph_daemon="mon.rh8ceph1"} 90.0
+# HELP ceph_mon_session_trim Trimmed sessions
+# TYPE ceph_mon_session_trim counter
+ceph_mon_session_trim{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_accept_timeout Accept timeouts
+# TYPE ceph_paxos_accept_timeout counter
+ceph_paxos_accept_timeout{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_begin Started and handled begins
+# TYPE ceph_paxos_begin counter
+ceph_paxos_begin{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_begin_bytes_sum Data in transaction on begin Total
+# TYPE ceph_paxos_begin_bytes_sum counter
+ceph_paxos_begin_bytes_sum{ceph_daemon="mon.rh8ceph1"} 2459912410.0
+# HELP ceph_paxos_begin_bytes_count Data in transaction on begin Count
+# TYPE ceph_paxos_begin_bytes_count counter
+ceph_paxos_begin_bytes_count{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_begin_keys_sum Keys in transaction on begin Total
+# TYPE ceph_paxos_begin_keys_sum counter
+ceph_paxos_begin_keys_sum{ceph_daemon="mon.rh8ceph1"} 462306.0
+# HELP ceph_paxos_begin_keys_count Keys in transaction on begin Count
+# TYPE ceph_paxos_begin_keys_count counter
+ceph_paxos_begin_keys_count{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_begin_latency_sum Latency of begin operation Total
+# TYPE ceph_paxos_begin_latency_sum counter
+ceph_paxos_begin_latency_sum{ceph_daemon="mon.rh8ceph1"} 4022.508905754
+# HELP ceph_paxos_begin_latency_count Latency of begin operation Count
+# TYPE ceph_paxos_begin_latency_count counter
+ceph_paxos_begin_latency_count{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_collect Peon collects
+# TYPE ceph_paxos_collect counter
+ceph_paxos_collect{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_bytes_sum Data in transaction on peon collect Total
+# TYPE ceph_paxos_collect_bytes_sum counter
+ceph_paxos_collect_bytes_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_bytes_count Data in transaction on peon collect Count
+# TYPE ceph_paxos_collect_bytes_count counter
+ceph_paxos_collect_bytes_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_keys_sum Keys in transaction on peon collect Total
+# TYPE ceph_paxos_collect_keys_sum counter
+ceph_paxos_collect_keys_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_keys_count Keys in transaction on peon collect Count
+# TYPE ceph_paxos_collect_keys_count counter
+ceph_paxos_collect_keys_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_latency_sum Peon collect latency Total
+# TYPE ceph_paxos_collect_latency_sum counter
+ceph_paxos_collect_latency_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_latency_count Peon collect latency Count
+# TYPE ceph_paxos_collect_latency_count counter
+ceph_paxos_collect_latency_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_timeout Collect timeouts
+# TYPE ceph_paxos_collect_timeout counter
+ceph_paxos_collect_timeout{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_collect_uncommitted Uncommitted values in started and handled collects
+# TYPE ceph_paxos_collect_uncommitted counter
+ceph_paxos_collect_uncommitted{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_commit Commits
+# TYPE ceph_paxos_commit counter
+ceph_paxos_commit{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_commit_bytes_sum Data in transaction on commit Total
+# TYPE ceph_paxos_commit_bytes_sum counter
+ceph_paxos_commit_bytes_sum{ceph_daemon="mon.rh8ceph1"} 2448127856.0
+# HELP ceph_paxos_commit_bytes_count Data in transaction on commit Count
+# TYPE ceph_paxos_commit_bytes_count counter
+ceph_paxos_commit_bytes_count{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_commit_keys_sum Keys in transaction on commit Total
+# TYPE ceph_paxos_commit_keys_sum counter
+ceph_paxos_commit_keys_sum{ceph_daemon="mon.rh8ceph1"} 1091268.0
+# HELP ceph_paxos_commit_keys_count Keys in transaction on commit Count
+# TYPE ceph_paxos_commit_keys_count counter
+ceph_paxos_commit_keys_count{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_commit_latency_sum Commit latency Total
+# TYPE ceph_paxos_commit_latency_sum counter
+ceph_paxos_commit_latency_sum{ceph_daemon="mon.rh8ceph1"} 2599.283522385
+# HELP ceph_paxos_commit_latency_count Commit latency Count
+# TYPE ceph_paxos_commit_latency_count counter
+ceph_paxos_commit_latency_count{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_lease_ack_timeout Lease acknowledgement timeouts
+# TYPE ceph_paxos_lease_ack_timeout counter
+ceph_paxos_lease_ack_timeout{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_lease_timeout Lease timeouts
+# TYPE ceph_paxos_lease_timeout counter
+ceph_paxos_lease_timeout{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_new_pn New proposal number queries
+# TYPE ceph_paxos_new_pn counter
+ceph_paxos_new_pn{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_new_pn_latency_sum New proposal number getting latency Total
+# TYPE ceph_paxos_new_pn_latency_sum counter
+ceph_paxos_new_pn_latency_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_new_pn_latency_count New proposal number getting latency Count
+# TYPE ceph_paxos_new_pn_latency_count counter
+ceph_paxos_new_pn_latency_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_refresh Refreshes
+# TYPE ceph_paxos_refresh counter
+ceph_paxos_refresh{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_refresh_latency_sum Refresh latency Total
+# TYPE ceph_paxos_refresh_latency_sum counter
+ceph_paxos_refresh_latency_sum{ceph_daemon="mon.rh8ceph1"} 363.361255384
+# HELP ceph_paxos_refresh_latency_count Refresh latency Count
+# TYPE ceph_paxos_refresh_latency_count counter
+ceph_paxos_refresh_latency_count{ceph_daemon="mon.rh8ceph1"} 154102.0
+# HELP ceph_paxos_restart Restarts
+# TYPE ceph_paxos_restart counter
+ceph_paxos_restart{ceph_daemon="mon.rh8ceph1"} 2.0
+# HELP ceph_paxos_share_state Sharings of state
+# TYPE ceph_paxos_share_state counter
+ceph_paxos_share_state{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_share_state_bytes_sum Data in shared state Total
+# TYPE ceph_paxos_share_state_bytes_sum counter
+ceph_paxos_share_state_bytes_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_share_state_bytes_count Data in shared state Count
+# TYPE ceph_paxos_share_state_bytes_count counter
+ceph_paxos_share_state_bytes_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_share_state_keys_sum Keys in shared state Total
+# TYPE ceph_paxos_share_state_keys_sum counter
+ceph_paxos_share_state_keys_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_share_state_keys_count Keys in shared state Count
+# TYPE ceph_paxos_share_state_keys_count counter
+ceph_paxos_share_state_keys_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_start_leader Starts in leader role
+# TYPE ceph_paxos_start_leader counter
+ceph_paxos_start_leader{ceph_daemon="mon.rh8ceph1"} 1.0
+# HELP ceph_paxos_start_peon Starts in peon role
+# TYPE ceph_paxos_start_peon counter
+ceph_paxos_start_peon{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_store_state Store a shared state on disk
+# TYPE ceph_paxos_store_state counter
+ceph_paxos_store_state{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_store_state_bytes_sum Data in transaction in stored state Total
+# TYPE ceph_paxos_store_state_bytes_sum counter
+ceph_paxos_store_state_bytes_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_store_state_bytes_count Data in transaction in stored state Count
+# TYPE ceph_paxos_store_state_bytes_count counter
+ceph_paxos_store_state_bytes_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_store_state_keys_sum Keys in transaction in stored state Total
+# TYPE ceph_paxos_store_state_keys_sum counter
+ceph_paxos_store_state_keys_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_store_state_keys_count Keys in transaction in stored state Count
+# TYPE ceph_paxos_store_state_keys_count counter
+ceph_paxos_store_state_keys_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_store_state_latency_sum Storing state latency Total
+# TYPE ceph_paxos_store_state_latency_sum counter
+ceph_paxos_store_state_latency_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_paxos_store_state_latency_count Storing state latency Count
+# TYPE ceph_paxos_store_state_latency_count counter
+ceph_paxos_store_state_latency_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_committed_bytes total bytes committed,
+# TYPE ceph_prioritycache:full_committed_bytes gauge
+ceph_prioritycache:full_committed_bytes{ceph_daemon="mon.rh8ceph1"} 79691776.0
+# HELP ceph_prioritycache:full_pri0_bytes bytes allocated to pri0
+# TYPE ceph_prioritycache:full_pri0_bytes gauge
+ceph_prioritycache:full_pri0_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri10_bytes bytes allocated to pri10
+# TYPE ceph_prioritycache:full_pri10_bytes gauge
+ceph_prioritycache:full_pri10_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri11_bytes bytes allocated to pri11
+# TYPE ceph_prioritycache:full_pri11_bytes gauge
+ceph_prioritycache:full_pri11_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri1_bytes bytes allocated to pri1
+# TYPE ceph_prioritycache:full_pri1_bytes gauge
+ceph_prioritycache:full_pri1_bytes{ceph_daemon="mon.rh8ceph1"} 8968933.0
+# HELP ceph_prioritycache:full_pri2_bytes bytes allocated to pri2
+# TYPE ceph_prioritycache:full_pri2_bytes gauge
+ceph_prioritycache:full_pri2_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri3_bytes bytes allocated to pri3
+# TYPE ceph_prioritycache:full_pri3_bytes gauge
+ceph_prioritycache:full_pri3_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri4_bytes bytes allocated to pri4
+# TYPE ceph_prioritycache:full_pri4_bytes gauge
+ceph_prioritycache:full_pri4_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri5_bytes bytes allocated to pri5
+# TYPE ceph_prioritycache:full_pri5_bytes gauge
+ceph_prioritycache:full_pri5_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri6_bytes bytes allocated to pri6
+# TYPE ceph_prioritycache:full_pri6_bytes gauge
+ceph_prioritycache:full_pri6_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri7_bytes bytes allocated to pri7
+# TYPE ceph_prioritycache:full_pri7_bytes gauge
+ceph_prioritycache:full_pri7_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri8_bytes bytes allocated to pri8
+# TYPE ceph_prioritycache:full_pri8_bytes gauge
+ceph_prioritycache:full_pri8_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_pri9_bytes bytes allocated to pri9
+# TYPE ceph_prioritycache:full_pri9_bytes gauge
+ceph_prioritycache:full_pri9_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:full_reserved_bytes bytes reserved for future growth.
+# TYPE ceph_prioritycache:full_reserved_bytes gauge
+ceph_prioritycache:full_reserved_bytes{ceph_daemon="mon.rh8ceph1"} 70722843.0
+# HELP ceph_prioritycache:inc_committed_bytes total bytes committed,
+# TYPE ceph_prioritycache:inc_committed_bytes gauge
+ceph_prioritycache:inc_committed_bytes{ceph_daemon="mon.rh8ceph1"} 71303168.0
+# HELP ceph_prioritycache:inc_pri0_bytes bytes allocated to pri0
+# TYPE ceph_prioritycache:inc_pri0_bytes gauge
+ceph_prioritycache:inc_pri0_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri10_bytes bytes allocated to pri10
+# TYPE ceph_prioritycache:inc_pri10_bytes gauge
+ceph_prioritycache:inc_pri10_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri11_bytes bytes allocated to pri11
+# TYPE ceph_prioritycache:inc_pri11_bytes gauge
+ceph_prioritycache:inc_pri11_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri1_bytes bytes allocated to pri1
+# TYPE ceph_prioritycache:inc_pri1_bytes gauge
+ceph_prioritycache:inc_pri1_bytes{ceph_daemon="mon.rh8ceph1"} 2566698.0
+# HELP ceph_prioritycache:inc_pri2_bytes bytes allocated to pri2
+# TYPE ceph_prioritycache:inc_pri2_bytes gauge
+ceph_prioritycache:inc_pri2_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri3_bytes bytes allocated to pri3
+# TYPE ceph_prioritycache:inc_pri3_bytes gauge
+ceph_prioritycache:inc_pri3_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri4_bytes bytes allocated to pri4
+# TYPE ceph_prioritycache:inc_pri4_bytes gauge
+ceph_prioritycache:inc_pri4_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri5_bytes bytes allocated to pri5
+# TYPE ceph_prioritycache:inc_pri5_bytes gauge
+ceph_prioritycache:inc_pri5_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri6_bytes bytes allocated to pri6
+# TYPE ceph_prioritycache:inc_pri6_bytes gauge
+ceph_prioritycache:inc_pri6_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri7_bytes bytes allocated to pri7
+# TYPE ceph_prioritycache:inc_pri7_bytes gauge
+ceph_prioritycache:inc_pri7_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri8_bytes bytes allocated to pri8
+# TYPE ceph_prioritycache:inc_pri8_bytes gauge
+ceph_prioritycache:inc_pri8_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_pri9_bytes bytes allocated to pri9
+# TYPE ceph_prioritycache:inc_pri9_bytes gauge
+ceph_prioritycache:inc_pri9_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:inc_reserved_bytes bytes reserved for future growth.
+# TYPE ceph_prioritycache:inc_reserved_bytes gauge
+ceph_prioritycache:inc_reserved_bytes{ceph_daemon="mon.rh8ceph1"} 68736470.0
+# HELP ceph_prioritycache:kv_committed_bytes total bytes committed,
+# TYPE ceph_prioritycache:kv_committed_bytes gauge
+ceph_prioritycache:kv_committed_bytes{ceph_daemon="mon.rh8ceph1"} 864026624.0
+# HELP ceph_prioritycache:kv_pri0_bytes bytes allocated to pri0
+# TYPE ceph_prioritycache:kv_pri0_bytes gauge
+ceph_prioritycache:kv_pri0_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri10_bytes bytes allocated to pri10
+# TYPE ceph_prioritycache:kv_pri10_bytes gauge
+ceph_prioritycache:kv_pri10_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri11_bytes bytes allocated to pri11
+# TYPE ceph_prioritycache:kv_pri11_bytes gauge
+ceph_prioritycache:kv_pri11_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri1_bytes bytes allocated to pri1
+# TYPE ceph_prioritycache:kv_pri1_bytes gauge
+ceph_prioritycache:kv_pri1_bytes{ceph_daemon="mon.rh8ceph1"} 794609596.0
+# HELP ceph_prioritycache:kv_pri2_bytes bytes allocated to pri2
+# TYPE ceph_prioritycache:kv_pri2_bytes gauge
+ceph_prioritycache:kv_pri2_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri3_bytes bytes allocated to pri3
+# TYPE ceph_prioritycache:kv_pri3_bytes gauge
+ceph_prioritycache:kv_pri3_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri4_bytes bytes allocated to pri4
+# TYPE ceph_prioritycache:kv_pri4_bytes gauge
+ceph_prioritycache:kv_pri4_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri5_bytes bytes allocated to pri5
+# TYPE ceph_prioritycache:kv_pri5_bytes gauge
+ceph_prioritycache:kv_pri5_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri6_bytes bytes allocated to pri6
+# TYPE ceph_prioritycache:kv_pri6_bytes gauge
+ceph_prioritycache:kv_pri6_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri7_bytes bytes allocated to pri7
+# TYPE ceph_prioritycache:kv_pri7_bytes gauge
+ceph_prioritycache:kv_pri7_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri8_bytes bytes allocated to pri8
+# TYPE ceph_prioritycache:kv_pri8_bytes gauge
+ceph_prioritycache:kv_pri8_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_pri9_bytes bytes allocated to pri9
+# TYPE ceph_prioritycache:kv_pri9_bytes gauge
+ceph_prioritycache:kv_pri9_bytes{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_prioritycache:kv_reserved_bytes bytes reserved for future growth.
+# TYPE ceph_prioritycache:kv_reserved_bytes gauge
+ceph_prioritycache:kv_reserved_bytes{ceph_daemon="mon.rh8ceph1"} 69417028.0
+# HELP ceph_rocksdb_compact Compactions
+# TYPE ceph_rocksdb_compact counter
+ceph_rocksdb_compact{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_compact_queue_len Length of compaction queue
+# TYPE ceph_rocksdb_compact_queue_len gauge
+ceph_rocksdb_compact_queue_len{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_compact_queue_merge Mergings of ranges in compaction queue
+# TYPE ceph_rocksdb_compact_queue_merge counter
+ceph_rocksdb_compact_queue_merge{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_compact_range Compactions by range
+# TYPE ceph_rocksdb_compact_range counter
+ceph_rocksdb_compact_range{ceph_daemon="mon.rh8ceph1"} 1652.0
+# HELP ceph_rocksdb_get Gets
+# TYPE ceph_rocksdb_get counter
+ceph_rocksdb_get{ceph_daemon="mon.rh8ceph1"} 6623604.0
+# HELP ceph_rocksdb_get_latency_sum Get latency Total
+# TYPE ceph_rocksdb_get_latency_sum counter
+ceph_rocksdb_get_latency_sum{ceph_daemon="mon.rh8ceph1"} 49.557947217
+# HELP ceph_rocksdb_get_latency_count Get latency Count
+# TYPE ceph_rocksdb_get_latency_count counter
+ceph_rocksdb_get_latency_count{ceph_daemon="mon.rh8ceph1"} 6623604.0
+# HELP ceph_rocksdb_rocksdb_write_delay_time_sum Rocksdb write delay time Total
+# TYPE ceph_rocksdb_rocksdb_write_delay_time_sum counter
+ceph_rocksdb_rocksdb_write_delay_time_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_rocksdb_write_delay_time_count Rocksdb write delay time Count
+# TYPE ceph_rocksdb_rocksdb_write_delay_time_count counter
+ceph_rocksdb_rocksdb_write_delay_time_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_rocksdb_write_memtable_time_sum Rocksdb write memtable time Total
+# TYPE ceph_rocksdb_rocksdb_write_memtable_time_sum counter
+ceph_rocksdb_rocksdb_write_memtable_time_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_rocksdb_write_memtable_time_count Rocksdb write memtable time Count
+# TYPE ceph_rocksdb_rocksdb_write_memtable_time_count counter
+ceph_rocksdb_rocksdb_write_memtable_time_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_rocksdb_write_pre_and_post_time_sum total time spent on writing a record, excluding write process Total
+# TYPE ceph_rocksdb_rocksdb_write_pre_and_post_time_sum counter
+ceph_rocksdb_rocksdb_write_pre_and_post_time_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_rocksdb_write_pre_and_post_time_count total time spent on writing a record, excluding write process Count
+# TYPE ceph_rocksdb_rocksdb_write_pre_and_post_time_count counter
+ceph_rocksdb_rocksdb_write_pre_and_post_time_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_rocksdb_write_wal_time_sum Rocksdb write wal time Total
+# TYPE ceph_rocksdb_rocksdb_write_wal_time_sum counter
+ceph_rocksdb_rocksdb_write_wal_time_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_rocksdb_write_wal_time_count Rocksdb write wal time Count
+# TYPE ceph_rocksdb_rocksdb_write_wal_time_count counter
+ceph_rocksdb_rocksdb_write_wal_time_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_submit_latency_sum Submit Latency Total
+# TYPE ceph_rocksdb_submit_latency_sum counter
+ceph_rocksdb_submit_latency_sum{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_submit_latency_count Submit Latency Count
+# TYPE ceph_rocksdb_submit_latency_count counter
+ceph_rocksdb_submit_latency_count{ceph_daemon="mon.rh8ceph1"} 0.0
+# HELP ceph_rocksdb_submit_sync_latency_sum Submit Sync Latency Total
+# TYPE ceph_rocksdb_submit_sync_latency_sum counter
+ceph_rocksdb_submit_sync_latency_sum{ceph_daemon="mon.rh8ceph1"} 6599.803464978
+# HELP ceph_rocksdb_submit_sync_latency_count Submit Sync Latency Count
+# TYPE ceph_rocksdb_submit_sync_latency_count counter
+ceph_rocksdb_submit_sync_latency_count{ceph_daemon="mon.rh8ceph1"} 311225.0
+# HELP ceph_bluefs_bytes_written_slow Bytes written to WAL/SSTs at slow device
+# TYPE ceph_bluefs_bytes_written_slow counter
+ceph_bluefs_bytes_written_slow{ceph_daemon="osd.0"} 0.0
+ceph_bluefs_bytes_written_slow{ceph_daemon="osd.1"} 0.0
+ceph_bluefs_bytes_written_slow{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluefs_bytes_written_sst Bytes written to SSTs
+# TYPE ceph_bluefs_bytes_written_sst counter
+ceph_bluefs_bytes_written_sst{ceph_daemon="osd.0"} 3031040.0
+ceph_bluefs_bytes_written_sst{ceph_daemon="osd.1"} 21983232.0
+ceph_bluefs_bytes_written_sst{ceph_daemon="osd.2"} 8564736.0
+# HELP ceph_bluefs_bytes_written_wal Bytes written to WAL
+# TYPE ceph_bluefs_bytes_written_wal counter
+ceph_bluefs_bytes_written_wal{ceph_daemon="osd.0"} 173608960.0
+ceph_bluefs_bytes_written_wal{ceph_daemon="osd.1"} 764923904.0
+ceph_bluefs_bytes_written_wal{ceph_daemon="osd.2"} 192692224.0
+# HELP ceph_bluefs_db_total_bytes Total bytes (main db device)
+# TYPE ceph_bluefs_db_total_bytes gauge
+ceph_bluefs_db_total_bytes{ceph_daemon="osd.0"} 1099507433472.0
+ceph_bluefs_db_total_bytes{ceph_daemon="osd.1"} 1099507433472.0
+ceph_bluefs_db_total_bytes{ceph_daemon="osd.2"} 1099507433472.0
+# HELP ceph_bluefs_db_used_bytes Used bytes (main db device)
+# TYPE ceph_bluefs_db_used_bytes gauge
+ceph_bluefs_db_used_bytes{ceph_daemon="osd.0"} 136380416.0
+ceph_bluefs_db_used_bytes{ceph_daemon="osd.1"} 521273344.0
+ceph_bluefs_db_used_bytes{ceph_daemon="osd.2"} 240844800.0
+# HELP ceph_bluefs_log_bytes Size of the metadata log
+# TYPE ceph_bluefs_log_bytes gauge
+ceph_bluefs_log_bytes{ceph_daemon="osd.0"} 2236416.0
+ceph_bluefs_log_bytes{ceph_daemon="osd.1"} 950272.0
+ceph_bluefs_log_bytes{ceph_daemon="osd.2"} 14114816.0
+# HELP ceph_bluefs_logged_bytes Bytes written to the metadata log
+# TYPE ceph_bluefs_logged_bytes counter
+ceph_bluefs_logged_bytes{ceph_daemon="osd.0"} 59293696.0
+ceph_bluefs_logged_bytes{ceph_daemon="osd.1"} 267186176.0
+ceph_bluefs_logged_bytes{ceph_daemon="osd.2"} 65937408.0
+# HELP ceph_bluefs_num_files File count
+# TYPE ceph_bluefs_num_files gauge
+ceph_bluefs_num_files{ceph_daemon="osd.0"} 34.0
+ceph_bluefs_num_files{ceph_daemon="osd.1"} 25.0
+ceph_bluefs_num_files{ceph_daemon="osd.2"} 26.0
+# HELP ceph_bluefs_read_bytes Bytes requested in buffered read mode
+# TYPE ceph_bluefs_read_bytes counter
+ceph_bluefs_read_bytes{ceph_daemon="osd.0"} 113848936.0
+ceph_bluefs_read_bytes{ceph_daemon="osd.1"} 412168332.0
+ceph_bluefs_read_bytes{ceph_daemon="osd.2"} 730788435.0
+# HELP ceph_bluefs_read_prefetch_bytes Bytes requested in prefetch read mode
+# TYPE ceph_bluefs_read_prefetch_bytes counter
+ceph_bluefs_read_prefetch_bytes{ceph_daemon="osd.0"} 23580893.0
+ceph_bluefs_read_prefetch_bytes{ceph_daemon="osd.1"} 47047266.0
+ceph_bluefs_read_prefetch_bytes{ceph_daemon="osd.2"} 41737159.0
+# HELP ceph_bluefs_read_random_buffer_bytes Bytes read from prefetch buffer in random read mode
+# TYPE ceph_bluefs_read_random_buffer_bytes counter
+ceph_bluefs_read_random_buffer_bytes{ceph_daemon="osd.0"} 11635036.0
+ceph_bluefs_read_random_buffer_bytes{ceph_daemon="osd.1"} 12433529.0
+ceph_bluefs_read_random_buffer_bytes{ceph_daemon="osd.2"} 21187766.0
+# HELP ceph_bluefs_read_random_bytes Bytes requested in random read mode
+# TYPE ceph_bluefs_read_random_bytes counter
+ceph_bluefs_read_random_bytes{ceph_daemon="osd.0"} 16877437.0
+ceph_bluefs_read_random_bytes{ceph_daemon="osd.1"} 39011615.0
+ceph_bluefs_read_random_bytes{ceph_daemon="osd.2"} 101656191.0
+# HELP ceph_bluefs_read_random_disk_bytes Bytes read from disk in random read mode
+# TYPE ceph_bluefs_read_random_disk_bytes counter
+ceph_bluefs_read_random_disk_bytes{ceph_daemon="osd.0"} 5242401.0
+ceph_bluefs_read_random_disk_bytes{ceph_daemon="osd.1"} 26578086.0
+ceph_bluefs_read_random_disk_bytes{ceph_daemon="osd.2"} 80468425.0
+# HELP ceph_bluefs_slow_total_bytes Total bytes (slow device)
+# TYPE ceph_bluefs_slow_total_bytes gauge
+ceph_bluefs_slow_total_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluefs_slow_total_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluefs_slow_total_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluefs_slow_used_bytes Used bytes (slow device)
+# TYPE ceph_bluefs_slow_used_bytes gauge
+ceph_bluefs_slow_used_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluefs_slow_used_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluefs_slow_used_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluefs_wal_total_bytes Total bytes (wal device)
+# TYPE ceph_bluefs_wal_total_bytes gauge
+ceph_bluefs_wal_total_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluefs_wal_total_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluefs_wal_total_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluefs_wal_used_bytes Used bytes (wal device)
+# TYPE ceph_bluefs_wal_used_bytes gauge
+ceph_bluefs_wal_used_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluefs_wal_used_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluefs_wal_used_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache_cache_bytes current memory available for caches.
+# TYPE ceph_bluestore_pricache_cache_bytes gauge
+ceph_bluestore_pricache_cache_bytes{ceph_daemon="osd.0"} 2845415832.0
+ceph_bluestore_pricache_cache_bytes{ceph_daemon="osd.1"} 2845415832.0
+ceph_bluestore_pricache_cache_bytes{ceph_daemon="osd.2"} 2845415832.0
+# HELP ceph_bluestore_pricache_heap_bytes aggregate bytes in use by the heap
+# TYPE ceph_bluestore_pricache_heap_bytes gauge
+ceph_bluestore_pricache_heap_bytes{ceph_daemon="osd.0"} 451289088.0
+ceph_bluestore_pricache_heap_bytes{ceph_daemon="osd.1"} 803610624.0
+ceph_bluestore_pricache_heap_bytes{ceph_daemon="osd.2"} 658907136.0
+# HELP ceph_bluestore_pricache_mapped_bytes total bytes mapped by the process
+# TYPE ceph_bluestore_pricache_mapped_bytes gauge
+ceph_bluestore_pricache_mapped_bytes{ceph_daemon="osd.0"} 450174976.0
+ceph_bluestore_pricache_mapped_bytes{ceph_daemon="osd.1"} 601513984.0
+ceph_bluestore_pricache_mapped_bytes{ceph_daemon="osd.2"} 534372352.0
+# HELP ceph_bluestore_pricache_target_bytes target process memory usage in bytes
+# TYPE ceph_bluestore_pricache_target_bytes gauge
+ceph_bluestore_pricache_target_bytes{ceph_daemon="osd.0"} 4294967296.0
+ceph_bluestore_pricache_target_bytes{ceph_daemon="osd.1"} 4294967296.0
+ceph_bluestore_pricache_target_bytes{ceph_daemon="osd.2"} 4294967296.0
+# HELP ceph_bluestore_pricache_unmapped_bytes unmapped bytes that the kernel has yet to reclaimed
+# TYPE ceph_bluestore_pricache_unmapped_bytes gauge
+ceph_bluestore_pricache_unmapped_bytes{ceph_daemon="osd.0"} 1114112.0
+ceph_bluestore_pricache_unmapped_bytes{ceph_daemon="osd.1"} 202096640.0
+ceph_bluestore_pricache_unmapped_bytes{ceph_daemon="osd.2"} 124534784.0
+# HELP ceph_bluestore_pricache:data_committed_bytes total bytes committed,
+# TYPE ceph_bluestore_pricache:data_committed_bytes gauge
+ceph_bluestore_pricache:data_committed_bytes{ceph_daemon="osd.0"} 218103808.0
+ceph_bluestore_pricache:data_committed_bytes{ceph_daemon="osd.1"} 218103808.0
+ceph_bluestore_pricache:data_committed_bytes{ceph_daemon="osd.2"} 218103808.0
+# HELP ceph_bluestore_pricache:data_pri0_bytes bytes allocated to pri0
+# TYPE ceph_bluestore_pricache:data_pri0_bytes gauge
+ceph_bluestore_pricache:data_pri0_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri0_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri0_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri10_bytes bytes allocated to pri10
+# TYPE ceph_bluestore_pricache:data_pri10_bytes gauge
+ceph_bluestore_pricache:data_pri10_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri10_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri10_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri11_bytes bytes allocated to pri11
+# TYPE ceph_bluestore_pricache:data_pri11_bytes gauge
+ceph_bluestore_pricache:data_pri11_bytes{ceph_daemon="osd.0"} 149170162.0
+ceph_bluestore_pricache:data_pri11_bytes{ceph_daemon="osd.1"} 148866680.0
+ceph_bluestore_pricache:data_pri11_bytes{ceph_daemon="osd.2"} 144340179.0
+# HELP ceph_bluestore_pricache:data_pri1_bytes bytes allocated to pri1
+# TYPE ceph_bluestore_pricache:data_pri1_bytes gauge
+ceph_bluestore_pricache:data_pri1_bytes{ceph_daemon="osd.0"} 1085440.0
+ceph_bluestore_pricache:data_pri1_bytes{ceph_daemon="osd.1"} 1064960.0
+ceph_bluestore_pricache:data_pri1_bytes{ceph_daemon="osd.2"} 1060864.0
+# HELP ceph_bluestore_pricache:data_pri2_bytes bytes allocated to pri2
+# TYPE ceph_bluestore_pricache:data_pri2_bytes gauge
+ceph_bluestore_pricache:data_pri2_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri2_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri2_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri3_bytes bytes allocated to pri3
+# TYPE ceph_bluestore_pricache:data_pri3_bytes gauge
+ceph_bluestore_pricache:data_pri3_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri3_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri3_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri4_bytes bytes allocated to pri4
+# TYPE ceph_bluestore_pricache:data_pri4_bytes gauge
+ceph_bluestore_pricache:data_pri4_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri4_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri4_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri5_bytes bytes allocated to pri5
+# TYPE ceph_bluestore_pricache:data_pri5_bytes gauge
+ceph_bluestore_pricache:data_pri5_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri5_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri5_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri6_bytes bytes allocated to pri6
+# TYPE ceph_bluestore_pricache:data_pri6_bytes gauge
+ceph_bluestore_pricache:data_pri6_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri6_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri6_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri7_bytes bytes allocated to pri7
+# TYPE ceph_bluestore_pricache:data_pri7_bytes gauge
+ceph_bluestore_pricache:data_pri7_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri7_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri7_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri8_bytes bytes allocated to pri8
+# TYPE ceph_bluestore_pricache:data_pri8_bytes gauge
+ceph_bluestore_pricache:data_pri8_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri8_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri8_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_pri9_bytes bytes allocated to pri9
+# TYPE ceph_bluestore_pricache:data_pri9_bytes gauge
+ceph_bluestore_pricache:data_pri9_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:data_pri9_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:data_pri9_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:data_reserved_bytes bytes reserved for future growth.
+# TYPE ceph_bluestore_pricache:data_reserved_bytes gauge
+ceph_bluestore_pricache:data_reserved_bytes{ceph_daemon="osd.0"} 67848206.0
+ceph_bluestore_pricache:data_reserved_bytes{ceph_daemon="osd.1"} 68172168.0
+ceph_bluestore_pricache:data_reserved_bytes{ceph_daemon="osd.2"} 72702765.0
+# HELP ceph_bluestore_pricache:kv_committed_bytes total bytes committed,
+# TYPE ceph_bluestore_pricache:kv_committed_bytes gauge
+ceph_bluestore_pricache:kv_committed_bytes{ceph_daemon="osd.0"} 1207959552.0
+ceph_bluestore_pricache:kv_committed_bytes{ceph_daemon="osd.1"} 1207959552.0
+ceph_bluestore_pricache:kv_committed_bytes{ceph_daemon="osd.2"} 1258291200.0
+# HELP ceph_bluestore_pricache:kv_pri0_bytes bytes allocated to pri0
+# TYPE ceph_bluestore_pricache:kv_pri0_bytes gauge
+ceph_bluestore_pricache:kv_pri0_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri0_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri0_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri10_bytes bytes allocated to pri10
+# TYPE ceph_bluestore_pricache:kv_pri10_bytes gauge
+ceph_bluestore_pricache:kv_pri10_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri10_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri10_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri11_bytes bytes allocated to pri11
+# TYPE ceph_bluestore_pricache:kv_pri11_bytes gauge
+ceph_bluestore_pricache:kv_pri11_bytes{ceph_daemon="osd.0"} 1118776219.0
+ceph_bluestore_pricache:kv_pri11_bytes{ceph_daemon="osd.1"} 1116500107.0
+ceph_bluestore_pricache:kv_pri11_bytes{ceph_daemon="osd.2"} 1082551349.0
+# HELP ceph_bluestore_pricache:kv_pri1_bytes bytes allocated to pri1
+# TYPE ceph_bluestore_pricache:kv_pri1_bytes gauge
+ceph_bluestore_pricache:kv_pri1_bytes{ceph_daemon="osd.0"} 12863584.0
+ceph_bluestore_pricache:kv_pri1_bytes{ceph_daemon="osd.1"} 11067600.0
+ceph_bluestore_pricache:kv_pri1_bytes{ceph_daemon="osd.2"} 92762128.0
+# HELP ceph_bluestore_pricache:kv_pri2_bytes bytes allocated to pri2
+# TYPE ceph_bluestore_pricache:kv_pri2_bytes gauge
+ceph_bluestore_pricache:kv_pri2_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri2_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri2_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri3_bytes bytes allocated to pri3
+# TYPE ceph_bluestore_pricache:kv_pri3_bytes gauge
+ceph_bluestore_pricache:kv_pri3_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri3_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri3_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri4_bytes bytes allocated to pri4
+# TYPE ceph_bluestore_pricache:kv_pri4_bytes gauge
+ceph_bluestore_pricache:kv_pri4_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri4_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri4_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri5_bytes bytes allocated to pri5
+# TYPE ceph_bluestore_pricache:kv_pri5_bytes gauge
+ceph_bluestore_pricache:kv_pri5_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri5_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri5_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri6_bytes bytes allocated to pri6
+# TYPE ceph_bluestore_pricache:kv_pri6_bytes gauge
+ceph_bluestore_pricache:kv_pri6_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri6_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri6_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri7_bytes bytes allocated to pri7
+# TYPE ceph_bluestore_pricache:kv_pri7_bytes gauge
+ceph_bluestore_pricache:kv_pri7_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri7_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri7_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri8_bytes bytes allocated to pri8
+# TYPE ceph_bluestore_pricache:kv_pri8_bytes gauge
+ceph_bluestore_pricache:kv_pri8_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri8_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri8_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_pri9_bytes bytes allocated to pri9
+# TYPE ceph_bluestore_pricache:kv_pri9_bytes gauge
+ceph_bluestore_pricache:kv_pri9_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_pri9_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_pri9_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_reserved_bytes bytes reserved for future growth.
+# TYPE ceph_bluestore_pricache:kv_reserved_bytes gauge
+ceph_bluestore_pricache:kv_reserved_bytes{ceph_daemon="osd.0"} 76319749.0
+ceph_bluestore_pricache:kv_reserved_bytes{ceph_daemon="osd.1"} 80391845.0
+ceph_bluestore_pricache:kv_reserved_bytes{ceph_daemon="osd.2"} 82977723.0
+# HELP ceph_bluestore_pricache:kv_onode_committed_bytes total bytes committed,
+# TYPE ceph_bluestore_pricache:kv_onode_committed_bytes gauge
+ceph_bluestore_pricache:kv_onode_committed_bytes{ceph_daemon="osd.0"} 184549376.0
+ceph_bluestore_pricache:kv_onode_committed_bytes{ceph_daemon="osd.1"} 184549376.0
+ceph_bluestore_pricache:kv_onode_committed_bytes{ceph_daemon="osd.2"} 184549376.0
+# HELP ceph_bluestore_pricache:kv_onode_pri0_bytes bytes allocated to pri0
+# TYPE ceph_bluestore_pricache:kv_onode_pri0_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri0_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri0_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri0_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri10_bytes bytes allocated to pri10
+# TYPE ceph_bluestore_pricache:kv_onode_pri10_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri10_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri10_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri10_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri11_bytes bytes allocated to pri11
+# TYPE ceph_bluestore_pricache:kv_onode_pri11_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri11_bytes{ceph_daemon="osd.0"} 99446775.0
+ceph_bluestore_pricache:kv_onode_pri11_bytes{ceph_daemon="osd.1"} 99244453.0
+ceph_bluestore_pricache:kv_onode_pri11_bytes{ceph_daemon="osd.2"} 96226786.0
+# HELP ceph_bluestore_pricache:kv_onode_pri1_bytes bytes allocated to pri1
+# TYPE ceph_bluestore_pricache:kv_onode_pri1_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri1_bytes{ceph_daemon="osd.0"} 3888800.0
+ceph_bluestore_pricache:kv_onode_pri1_bytes{ceph_daemon="osd.1"} 6333232.0
+ceph_bluestore_pricache:kv_onode_pri1_bytes{ceph_daemon="osd.2"} 4468848.0
+# HELP ceph_bluestore_pricache:kv_onode_pri2_bytes bytes allocated to pri2
+# TYPE ceph_bluestore_pricache:kv_onode_pri2_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri2_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri2_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri2_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri3_bytes bytes allocated to pri3
+# TYPE ceph_bluestore_pricache:kv_onode_pri3_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri3_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri3_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri3_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri4_bytes bytes allocated to pri4
+# TYPE ceph_bluestore_pricache:kv_onode_pri4_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri4_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri4_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri4_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri5_bytes bytes allocated to pri5
+# TYPE ceph_bluestore_pricache:kv_onode_pri5_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri5_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri5_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri5_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri6_bytes bytes allocated to pri6
+# TYPE ceph_bluestore_pricache:kv_onode_pri6_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri6_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri6_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri6_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri7_bytes bytes allocated to pri7
+# TYPE ceph_bluestore_pricache:kv_onode_pri7_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri7_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri7_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri7_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri8_bytes bytes allocated to pri8
+# TYPE ceph_bluestore_pricache:kv_onode_pri8_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri8_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri8_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri8_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_pri9_bytes bytes allocated to pri9
+# TYPE ceph_bluestore_pricache:kv_onode_pri9_bytes gauge
+ceph_bluestore_pricache:kv_onode_pri9_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:kv_onode_pri9_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:kv_onode_pri9_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:kv_onode_reserved_bytes bytes reserved for future growth.
+# TYPE ceph_bluestore_pricache:kv_onode_reserved_bytes gauge
+ceph_bluestore_pricache:kv_onode_reserved_bytes{ceph_daemon="osd.0"} 81213801.0
+ceph_bluestore_pricache:kv_onode_reserved_bytes{ceph_daemon="osd.1"} 78971691.0
+ceph_bluestore_pricache:kv_onode_reserved_bytes{ceph_daemon="osd.2"} 83853742.0
+# HELP ceph_bluestore_pricache:meta_committed_bytes total bytes committed,
+# TYPE ceph_bluestore_pricache:meta_committed_bytes gauge
+ceph_bluestore_pricache:meta_committed_bytes{ceph_daemon="osd.0"} 1207959552.0
+ceph_bluestore_pricache:meta_committed_bytes{ceph_daemon="osd.1"} 1207959552.0
+ceph_bluestore_pricache:meta_committed_bytes{ceph_daemon="osd.2"} 1157627904.0
+# HELP ceph_bluestore_pricache:meta_pri0_bytes bytes allocated to pri0
+# TYPE ceph_bluestore_pricache:meta_pri0_bytes gauge
+ceph_bluestore_pricache:meta_pri0_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri0_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri0_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri10_bytes bytes allocated to pri10
+# TYPE ceph_bluestore_pricache:meta_pri10_bytes gauge
+ceph_bluestore_pricache:meta_pri10_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri10_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri10_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri11_bytes bytes allocated to pri11
+# TYPE ceph_bluestore_pricache:meta_pri11_bytes gauge
+ceph_bluestore_pricache:meta_pri11_bytes{ceph_daemon="osd.0"} 1118776219.0
+ceph_bluestore_pricache:meta_pri11_bytes{ceph_daemon="osd.1"} 1116500107.0
+ceph_bluestore_pricache:meta_pri11_bytes{ceph_daemon="osd.2"} 1082551349.0
+# HELP ceph_bluestore_pricache:meta_pri1_bytes bytes allocated to pri1
+# TYPE ceph_bluestore_pricache:meta_pri1_bytes gauge
+ceph_bluestore_pricache:meta_pri1_bytes{ceph_daemon="osd.0"} 5864311.0
+ceph_bluestore_pricache:meta_pri1_bytes{ceph_daemon="osd.1"} 10294371.0
+ceph_bluestore_pricache:meta_pri1_bytes{ceph_daemon="osd.2"} 5910007.0
+# HELP ceph_bluestore_pricache:meta_pri2_bytes bytes allocated to pri2
+# TYPE ceph_bluestore_pricache:meta_pri2_bytes gauge
+ceph_bluestore_pricache:meta_pri2_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri2_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri2_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri3_bytes bytes allocated to pri3
+# TYPE ceph_bluestore_pricache:meta_pri3_bytes gauge
+ceph_bluestore_pricache:meta_pri3_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri3_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri3_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri4_bytes bytes allocated to pri4
+# TYPE ceph_bluestore_pricache:meta_pri4_bytes gauge
+ceph_bluestore_pricache:meta_pri4_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri4_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri4_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri5_bytes bytes allocated to pri5
+# TYPE ceph_bluestore_pricache:meta_pri5_bytes gauge
+ceph_bluestore_pricache:meta_pri5_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri5_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri5_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri6_bytes bytes allocated to pri6
+# TYPE ceph_bluestore_pricache:meta_pri6_bytes gauge
+ceph_bluestore_pricache:meta_pri6_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri6_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri6_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri7_bytes bytes allocated to pri7
+# TYPE ceph_bluestore_pricache:meta_pri7_bytes gauge
+ceph_bluestore_pricache:meta_pri7_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri7_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri7_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri8_bytes bytes allocated to pri8
+# TYPE ceph_bluestore_pricache:meta_pri8_bytes gauge
+ceph_bluestore_pricache:meta_pri8_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri8_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri8_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_pri9_bytes bytes allocated to pri9
+# TYPE ceph_bluestore_pricache:meta_pri9_bytes gauge
+ceph_bluestore_pricache:meta_pri9_bytes{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_pricache:meta_pri9_bytes{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_pricache:meta_pri9_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_pricache:meta_reserved_bytes bytes reserved for future growth.
+# TYPE ceph_bluestore_pricache:meta_reserved_bytes gauge
+ceph_bluestore_pricache:meta_reserved_bytes{ceph_daemon="osd.0"} 83319022.0
+ceph_bluestore_pricache:meta_reserved_bytes{ceph_daemon="osd.1"} 81165074.0
+ceph_bluestore_pricache:meta_reserved_bytes{ceph_daemon="osd.2"} 69166548.0
+# HELP ceph_bluestore_bluestore_compressed Sum for stored compressed bytes
+# TYPE ceph_bluestore_bluestore_compressed gauge
+ceph_bluestore_bluestore_compressed{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_bluestore_compressed{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_bluestore_compressed{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_bluestore_compressed_allocated Sum for bytes allocated for compressed data
+# TYPE ceph_bluestore_bluestore_compressed_allocated gauge
+ceph_bluestore_bluestore_compressed_allocated{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_bluestore_compressed_allocated{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_bluestore_compressed_allocated{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_bluestore_compressed_original Sum for original bytes that were compressed
+# TYPE ceph_bluestore_bluestore_compressed_original gauge
+ceph_bluestore_bluestore_compressed_original{ceph_daemon="osd.0"} 0.0
+ceph_bluestore_bluestore_compressed_original{ceph_daemon="osd.1"} 0.0
+ceph_bluestore_bluestore_compressed_original{ceph_daemon="osd.2"} 0.0
+# HELP ceph_bluestore_commit_lat_sum Average commit latency Total
+# TYPE ceph_bluestore_commit_lat_sum counter
+ceph_bluestore_commit_lat_sum{ceph_daemon="osd.0"} 2697.847318681
+ceph_bluestore_commit_lat_sum{ceph_daemon="osd.1"} 10952.001373697
+ceph_bluestore_commit_lat_sum{ceph_daemon="osd.2"} 2881.251669453
+# HELP ceph_bluestore_commit_lat_count Average commit latency Count
+# TYPE ceph_bluestore_commit_lat_count counter
+ceph_bluestore_commit_lat_count{ceph_daemon="osd.0"} 61622.0
+ceph_bluestore_commit_lat_count{ceph_daemon="osd.1"} 270039.0
+ceph_bluestore_commit_lat_count{ceph_daemon="osd.2"} 68419.0
+# HELP ceph_bluestore_kv_final_lat_sum Average kv_finalize thread latency Total
+# TYPE ceph_bluestore_kv_final_lat_sum counter
+ceph_bluestore_kv_final_lat_sum{ceph_daemon="osd.0"} 0.902575469
+ceph_bluestore_kv_final_lat_sum{ceph_daemon="osd.1"} 3.895706526
+ceph_bluestore_kv_final_lat_sum{ceph_daemon="osd.2"} 1.020181153
+# HELP ceph_bluestore_kv_final_lat_count Average kv_finalize thread latency Count
+# TYPE ceph_bluestore_kv_final_lat_count counter
+ceph_bluestore_kv_final_lat_count{ceph_daemon="osd.0"} 14459.0
+ceph_bluestore_kv_final_lat_count{ceph_daemon="osd.1"} 65192.0
+ceph_bluestore_kv_final_lat_count{ceph_daemon="osd.2"} 16075.0
+# HELP ceph_bluestore_kv_flush_lat_sum Average kv_thread flush latency Total
+# TYPE ceph_bluestore_kv_flush_lat_sum counter
+ceph_bluestore_kv_flush_lat_sum{ceph_daemon="osd.0"} 0.012324202
+ceph_bluestore_kv_flush_lat_sum{ceph_daemon="osd.1"} 0.033370576
+ceph_bluestore_kv_flush_lat_sum{ceph_daemon="osd.2"} 0.011604864
+# HELP ceph_bluestore_kv_flush_lat_count Average kv_thread flush latency Count
+# TYPE ceph_bluestore_kv_flush_lat_count counter
+ceph_bluestore_kv_flush_lat_count{ceph_daemon="osd.0"} 14459.0
+ceph_bluestore_kv_flush_lat_count{ceph_daemon="osd.1"} 65192.0
+ceph_bluestore_kv_flush_lat_count{ceph_daemon="osd.2"} 16075.0
+# HELP ceph_bluestore_kv_sync_lat_sum Average kv_sync thread latency Total
+# TYPE ceph_bluestore_kv_sync_lat_sum counter
+ceph_bluestore_kv_sync_lat_sum{ceph_daemon="osd.0"} 367.265669443
+ceph_bluestore_kv_sync_lat_sum{ceph_daemon="osd.1"} 1505.797632327
+ceph_bluestore_kv_sync_lat_sum{ceph_daemon="osd.2"} 402.314901953
+# HELP ceph_bluestore_kv_sync_lat_count Average kv_sync thread latency Count
+# TYPE ceph_bluestore_kv_sync_lat_count counter
+ceph_bluestore_kv_sync_lat_count{ceph_daemon="osd.0"} 14459.0
+ceph_bluestore_kv_sync_lat_count{ceph_daemon="osd.1"} 65192.0
+ceph_bluestore_kv_sync_lat_count{ceph_daemon="osd.2"} 16075.0
+# HELP ceph_bluestore_read_lat_sum Average read latency Total
+# TYPE ceph_bluestore_read_lat_sum counter
+ceph_bluestore_read_lat_sum{ceph_daemon="osd.0"} 5.989620661
+ceph_bluestore_read_lat_sum{ceph_daemon="osd.1"} 18.777242731
+ceph_bluestore_read_lat_sum{ceph_daemon="osd.2"} 6.285231533
+# HELP ceph_bluestore_read_lat_count Average read latency Count
+# TYPE ceph_bluestore_read_lat_count counter
+ceph_bluestore_read_lat_count{ceph_daemon="osd.0"} 5223.0
+ceph_bluestore_read_lat_count{ceph_daemon="osd.1"} 22502.0
+ceph_bluestore_read_lat_count{ceph_daemon="osd.2"} 4561.0
+# HELP ceph_bluestore_state_aio_wait_lat_sum Average aio_wait state latency Total
+# TYPE ceph_bluestore_state_aio_wait_lat_sum counter
+ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon="osd.0"} 0.014831512
+ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon="osd.1"} 0.058767889
+ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon="osd.2"} 0.017115728
+# HELP ceph_bluestore_state_aio_wait_lat_count Average aio_wait state latency Count
+# TYPE ceph_bluestore_state_aio_wait_lat_count counter
+ceph_bluestore_state_aio_wait_lat_count{ceph_daemon="osd.0"} 61622.0
+ceph_bluestore_state_aio_wait_lat_count{ceph_daemon="osd.1"} 270039.0
+ceph_bluestore_state_aio_wait_lat_count{ceph_daemon="osd.2"} 68419.0
+# HELP ceph_bluestore_submit_lat_sum Average submit latency Total
+# TYPE ceph_bluestore_submit_lat_sum counter
+ceph_bluestore_submit_lat_sum{ceph_daemon="osd.0"} 4.018256531
+ceph_bluestore_submit_lat_sum{ceph_daemon="osd.1"} 17.525389317
+ceph_bluestore_submit_lat_sum{ceph_daemon="osd.2"} 4.478226747
+# HELP ceph_bluestore_submit_lat_count Average submit latency Count
+# TYPE ceph_bluestore_submit_lat_count counter
+ceph_bluestore_submit_lat_count{ceph_daemon="osd.0"} 61622.0
+ceph_bluestore_submit_lat_count{ceph_daemon="osd.1"} 270039.0
+ceph_bluestore_submit_lat_count{ceph_daemon="osd.2"} 68419.0
+# HELP ceph_bluestore_throttle_lat_sum Average submit throttle latency Total
+# TYPE ceph_bluestore_throttle_lat_sum counter
+ceph_bluestore_throttle_lat_sum{ceph_daemon="osd.0"} 1.234334151
+ceph_bluestore_throttle_lat_sum{ceph_daemon="osd.1"} 5.570343469
+ceph_bluestore_throttle_lat_sum{ceph_daemon="osd.2"} 1.318851157
+# HELP ceph_bluestore_throttle_lat_count Average submit throttle latency Count
+# TYPE ceph_bluestore_throttle_lat_count counter
+ceph_bluestore_throttle_lat_count{ceph_daemon="osd.0"} 61622.0
+ceph_bluestore_throttle_lat_count{ceph_daemon="osd.1"} 270039.0
+ceph_bluestore_throttle_lat_count{ceph_daemon="osd.2"} 68419.0
+# HELP ceph_objecter_op_active Operations active
+# TYPE ceph_objecter_op_active gauge
+ceph_objecter_op_active{ceph_daemon="osd.0"} 0.0
+ceph_objecter_op_active{ceph_daemon="osd.1"} 0.0
+ceph_objecter_op_active{ceph_daemon="osd.2"} 0.0
+ceph_objecter_op_active{ceph_daemon="rbd-mirror.44157"} 0.0
+# HELP ceph_objecter_op_r Read operations
+# TYPE ceph_objecter_op_r counter
+ceph_objecter_op_r{ceph_daemon="osd.0"} 0.0
+ceph_objecter_op_r{ceph_daemon="osd.1"} 0.0
+ceph_objecter_op_r{ceph_daemon="osd.2"} 0.0
+ceph_objecter_op_r{ceph_daemon="rbd-mirror.44157"} 1233.0
+# HELP ceph_objecter_op_rmw Read-modify-write operations
+# TYPE ceph_objecter_op_rmw counter
+ceph_objecter_op_rmw{ceph_daemon="osd.0"} 0.0
+ceph_objecter_op_rmw{ceph_daemon="osd.1"} 0.0
+ceph_objecter_op_rmw{ceph_daemon="osd.2"} 0.0
+ceph_objecter_op_rmw{ceph_daemon="rbd-mirror.44157"} 0.0
+# HELP ceph_objecter_op_w Write operations
+# TYPE ceph_objecter_op_w counter
+ceph_objecter_op_w{ceph_daemon="osd.0"} 0.0
+ceph_objecter_op_w{ceph_daemon="osd.1"} 0.0
+ceph_objecter_op_w{ceph_daemon="osd.2"} 0.0
+ceph_objecter_op_w{ceph_daemon="rbd-mirror.44157"} 0.0
+# HELP ceph_osd_numpg Placement groups
+# TYPE ceph_osd_numpg gauge
+ceph_osd_numpg{ceph_daemon="osd.0"} 33.0
+ceph_osd_numpg{ceph_daemon="osd.1"} 33.0
+ceph_osd_numpg{ceph_daemon="osd.2"} 33.0
+# HELP ceph_osd_numpg_removing Placement groups queued for local deletion
+# TYPE ceph_osd_numpg_removing gauge
+ceph_osd_numpg_removing{ceph_daemon="osd.0"} 0.0
+ceph_osd_numpg_removing{ceph_daemon="osd.1"} 0.0
+ceph_osd_numpg_removing{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op Client operations
+# TYPE ceph_osd_op counter
+ceph_osd_op{ceph_daemon="osd.0"} 21901.0
+ceph_osd_op{ceph_daemon="osd.1"} 269039.0
+ceph_osd_op{ceph_daemon="osd.2"} 5133.0
+# HELP ceph_osd_op_in_bytes Client operations total write size
+# TYPE ceph_osd_op_in_bytes counter
+ceph_osd_op_in_bytes{ceph_daemon="osd.0"} 16912.0
+ceph_osd_op_in_bytes{ceph_daemon="osd.1"} 68600.0
+ceph_osd_op_in_bytes{ceph_daemon="osd.2"} 13664.0
+# HELP ceph_osd_op_latency_sum Latency of client operations (including queue time) Total
+# TYPE ceph_osd_op_latency_sum counter
+ceph_osd_op_latency_sum{ceph_daemon="osd.0"} 40.299726658
+ceph_osd_op_latency_sum{ceph_daemon="osd.1"} 1393.902748443
+ceph_osd_op_latency_sum{ceph_daemon="osd.2"} 16.03087504
+# HELP ceph_osd_op_latency_count Latency of client operations (including queue time) Count
+# TYPE ceph_osd_op_latency_count counter
+ceph_osd_op_latency_count{ceph_daemon="osd.0"} 21901.0
+ceph_osd_op_latency_count{ceph_daemon="osd.1"} 269039.0
+ceph_osd_op_latency_count{ceph_daemon="osd.2"} 5133.0
+# HELP ceph_osd_op_out_bytes Client operations total read size
+# TYPE ceph_osd_op_out_bytes counter
+ceph_osd_op_out_bytes{ceph_daemon="osd.0"} 55145.0
+ceph_osd_op_out_bytes{ceph_daemon="osd.1"} 12125219.0
+ceph_osd_op_out_bytes{ceph_daemon="osd.2"} 113201.0
+# HELP ceph_osd_op_prepare_latency_sum Latency of client operations (excluding queue time and wait for finished) Total
+# TYPE ceph_osd_op_prepare_latency_sum counter
+ceph_osd_op_prepare_latency_sum{ceph_daemon="osd.0"} 4.31120693
+ceph_osd_op_prepare_latency_sum{ceph_daemon="osd.1"} 113.270932891
+ceph_osd_op_prepare_latency_sum{ceph_daemon="osd.2"} 1.094689955
+# HELP ceph_osd_op_prepare_latency_count Latency of client operations (excluding queue time and wait for finished) Count
+# TYPE ceph_osd_op_prepare_latency_count counter
+ceph_osd_op_prepare_latency_count{ceph_daemon="osd.0"} 21902.0
+ceph_osd_op_prepare_latency_count{ceph_daemon="osd.1"} 269092.0
+ceph_osd_op_prepare_latency_count{ceph_daemon="osd.2"} 5133.0
+# HELP ceph_osd_op_process_latency_sum Latency of client operations (excluding queue time) Total
+# TYPE ceph_osd_op_process_latency_sum counter
+ceph_osd_op_process_latency_sum{ceph_daemon="osd.0"} 21.344056613
+ceph_osd_op_process_latency_sum{ceph_daemon="osd.1"} 1031.115964298
+ceph_osd_op_process_latency_sum{ceph_daemon="osd.2"} 14.310175904
+# HELP ceph_osd_op_process_latency_count Latency of client operations (excluding queue time) Count
+# TYPE ceph_osd_op_process_latency_count counter
+ceph_osd_op_process_latency_count{ceph_daemon="osd.0"} 21901.0
+ceph_osd_op_process_latency_count{ceph_daemon="osd.1"} 269039.0
+ceph_osd_op_process_latency_count{ceph_daemon="osd.2"} 5133.0
+# HELP ceph_osd_op_r Client read operations
+# TYPE ceph_osd_op_r counter
+ceph_osd_op_r{ceph_daemon="osd.0"} 21297.0
+ceph_osd_op_r{ceph_daemon="osd.1"} 238872.0
+ceph_osd_op_r{ceph_daemon="osd.2"} 4645.0
+# HELP ceph_osd_op_r_latency_sum Latency of read operation (including queue time) Total
+# TYPE ceph_osd_op_r_latency_sum counter
+ceph_osd_op_r_latency_sum{ceph_daemon="osd.0"} 21.894947899
+ceph_osd_op_r_latency_sum{ceph_daemon="osd.1"} 244.191054389
+ceph_osd_op_r_latency_sum{ceph_daemon="osd.2"} 1.123965076
+# HELP ceph_osd_op_r_latency_count Latency of read operation (including queue time) Count
+# TYPE ceph_osd_op_r_latency_count counter
+ceph_osd_op_r_latency_count{ceph_daemon="osd.0"} 21297.0
+ceph_osd_op_r_latency_count{ceph_daemon="osd.1"} 238872.0
+ceph_osd_op_r_latency_count{ceph_daemon="osd.2"} 4645.0
+# HELP ceph_osd_op_r_out_bytes Client data read
+# TYPE ceph_osd_op_r_out_bytes counter
+ceph_osd_op_r_out_bytes{ceph_daemon="osd.0"} 55145.0
+ceph_osd_op_r_out_bytes{ceph_daemon="osd.1"} 12125219.0
+ceph_osd_op_r_out_bytes{ceph_daemon="osd.2"} 113201.0
+# HELP ceph_osd_op_r_prepare_latency_sum Latency of read operations (excluding queue time and wait for finished) Total
+# TYPE ceph_osd_op_r_prepare_latency_sum counter
+ceph_osd_op_r_prepare_latency_sum{ceph_daemon="osd.0"} 4.055422649
+ceph_osd_op_r_prepare_latency_sum{ceph_daemon="osd.1"} 87.296582151
+ceph_osd_op_r_prepare_latency_sum{ceph_daemon="osd.2"} 0.884942386
+# HELP ceph_osd_op_r_prepare_latency_count Latency of read operations (excluding queue time and wait for finished) Count
+# TYPE ceph_osd_op_r_prepare_latency_count counter
+ceph_osd_op_r_prepare_latency_count{ceph_daemon="osd.0"} 21297.0
+ceph_osd_op_r_prepare_latency_count{ceph_daemon="osd.1"} 238896.0
+ceph_osd_op_r_prepare_latency_count{ceph_daemon="osd.2"} 4645.0
+# HELP ceph_osd_op_r_process_latency_sum Latency of read operation (excluding queue time) Total
+# TYPE ceph_osd_op_r_process_latency_sum counter
+ceph_osd_op_r_process_latency_sum{ceph_daemon="osd.0"} 2.974073895
+ceph_osd_op_r_process_latency_sum{ceph_daemon="osd.1"} 76.576926334
+ceph_osd_op_r_process_latency_sum{ceph_daemon="osd.2"} 0.706655996
+# HELP ceph_osd_op_r_process_latency_count Latency of read operation (excluding queue time) Count
+# TYPE ceph_osd_op_r_process_latency_count counter
+ceph_osd_op_r_process_latency_count{ceph_daemon="osd.0"} 21297.0
+ceph_osd_op_r_process_latency_count{ceph_daemon="osd.1"} 238872.0
+ceph_osd_op_r_process_latency_count{ceph_daemon="osd.2"} 4645.0
+# HELP ceph_osd_op_rw Client read-modify-write operations
+# TYPE ceph_osd_op_rw counter
+ceph_osd_op_rw{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_rw{ceph_daemon="osd.1"} 27721.0
+ceph_osd_op_rw{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_in_bytes Client read-modify-write operations write in
+# TYPE ceph_osd_op_rw_in_bytes counter
+ceph_osd_op_rw_in_bytes{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_rw_in_bytes{ceph_daemon="osd.1"} 0.0
+ceph_osd_op_rw_in_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_latency_sum Latency of read-modify-write operation (including queue time) Total
+# TYPE ceph_osd_op_rw_latency_sum counter
+ceph_osd_op_rw_latency_sum{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_rw_latency_sum{ceph_daemon="osd.1"} 1085.141590913
+ceph_osd_op_rw_latency_sum{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_latency_count Latency of read-modify-write operation (including queue time) Count
+# TYPE ceph_osd_op_rw_latency_count counter
+ceph_osd_op_rw_latency_count{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_rw_latency_count{ceph_daemon="osd.1"} 27721.0
+ceph_osd_op_rw_latency_count{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_out_bytes Client read-modify-write operations read out 
+# TYPE ceph_osd_op_rw_out_bytes counter
+ceph_osd_op_rw_out_bytes{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_rw_out_bytes{ceph_daemon="osd.1"} 0.0
+ceph_osd_op_rw_out_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_prepare_latency_sum Latency of read-modify-write operations (excluding queue time and wait for finished) Total
+# TYPE ceph_osd_op_rw_prepare_latency_sum counter
+ceph_osd_op_rw_prepare_latency_sum{ceph_daemon="osd.0"} 0.000912758
+ceph_osd_op_rw_prepare_latency_sum{ceph_daemon="osd.1"} 25.091784014
+ceph_osd_op_rw_prepare_latency_sum{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_prepare_latency_count Latency of read-modify-write operations (excluding queue time and wait for finished) Count
+# TYPE ceph_osd_op_rw_prepare_latency_count counter
+ceph_osd_op_rw_prepare_latency_count{ceph_daemon="osd.0"} 1.0
+ceph_osd_op_rw_prepare_latency_count{ceph_daemon="osd.1"} 27750.0
+ceph_osd_op_rw_prepare_latency_count{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_process_latency_sum Latency of read-modify-write operation (excluding queue time) Total
+# TYPE ceph_osd_op_rw_process_latency_sum counter
+ceph_osd_op_rw_process_latency_sum{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_rw_process_latency_sum{ceph_daemon="osd.1"} 890.09328649
+ceph_osd_op_rw_process_latency_sum{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_rw_process_latency_count Latency of read-modify-write operation (excluding queue time) Count
+# TYPE ceph_osd_op_rw_process_latency_count counter
+ceph_osd_op_rw_process_latency_count{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_rw_process_latency_count{ceph_daemon="osd.1"} 27721.0
+ceph_osd_op_rw_process_latency_count{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_op_w Client write operations
+# TYPE ceph_osd_op_w counter
+ceph_osd_op_w{ceph_daemon="osd.0"} 604.0
+ceph_osd_op_w{ceph_daemon="osd.1"} 2446.0
+ceph_osd_op_w{ceph_daemon="osd.2"} 488.0
+# HELP ceph_osd_op_w_in_bytes Client data written
+# TYPE ceph_osd_op_w_in_bytes counter
+ceph_osd_op_w_in_bytes{ceph_daemon="osd.0"} 16912.0
+ceph_osd_op_w_in_bytes{ceph_daemon="osd.1"} 68600.0
+ceph_osd_op_w_in_bytes{ceph_daemon="osd.2"} 13664.0
+# HELP ceph_osd_op_w_latency_sum Latency of write operation (including queue time) Total
+# TYPE ceph_osd_op_w_latency_sum counter
+ceph_osd_op_w_latency_sum{ceph_daemon="osd.0"} 18.404778759
+ceph_osd_op_w_latency_sum{ceph_daemon="osd.1"} 64.570103141
+ceph_osd_op_w_latency_sum{ceph_daemon="osd.2"} 14.906909964
+# HELP ceph_osd_op_w_latency_count Latency of write operation (including queue time) Count
+# TYPE ceph_osd_op_w_latency_count counter
+ceph_osd_op_w_latency_count{ceph_daemon="osd.0"} 604.0
+ceph_osd_op_w_latency_count{ceph_daemon="osd.1"} 2446.0
+ceph_osd_op_w_latency_count{ceph_daemon="osd.2"} 488.0
+# HELP ceph_osd_op_w_prepare_latency_sum Latency of write operations (excluding queue time and wait for finished) Total
+# TYPE ceph_osd_op_w_prepare_latency_sum counter
+ceph_osd_op_w_prepare_latency_sum{ceph_daemon="osd.0"} 0.254871523
+ceph_osd_op_w_prepare_latency_sum{ceph_daemon="osd.1"} 0.882566726
+ceph_osd_op_w_prepare_latency_sum{ceph_daemon="osd.2"} 0.209747569
+# HELP ceph_osd_op_w_prepare_latency_count Latency of write operations (excluding queue time and wait for finished) Count
+# TYPE ceph_osd_op_w_prepare_latency_count counter
+ceph_osd_op_w_prepare_latency_count{ceph_daemon="osd.0"} 604.0
+ceph_osd_op_w_prepare_latency_count{ceph_daemon="osd.1"} 2446.0
+ceph_osd_op_w_prepare_latency_count{ceph_daemon="osd.2"} 488.0
+# HELP ceph_osd_op_w_process_latency_sum Latency of write operation (excluding queue time) Total
+# TYPE ceph_osd_op_w_process_latency_sum counter
+ceph_osd_op_w_process_latency_sum{ceph_daemon="osd.0"} 18.369982718
+ceph_osd_op_w_process_latency_sum{ceph_daemon="osd.1"} 64.445751474
+ceph_osd_op_w_process_latency_sum{ceph_daemon="osd.2"} 13.603519908
+# HELP ceph_osd_op_w_process_latency_count Latency of write operation (excluding queue time) Count
+# TYPE ceph_osd_op_w_process_latency_count counter
+ceph_osd_op_w_process_latency_count{ceph_daemon="osd.0"} 604.0
+ceph_osd_op_w_process_latency_count{ceph_daemon="osd.1"} 2446.0
+ceph_osd_op_w_process_latency_count{ceph_daemon="osd.2"} 488.0
+# HELP ceph_osd_op_wip Replication operations currently being processed (primary)
+# TYPE ceph_osd_op_wip gauge
+ceph_osd_op_wip{ceph_daemon="osd.0"} 0.0
+ceph_osd_op_wip{ceph_daemon="osd.1"} 0.0
+ceph_osd_op_wip{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_recovery_bytes recovery bytes
+# TYPE ceph_osd_recovery_bytes counter
+ceph_osd_recovery_bytes{ceph_daemon="osd.0"} 0.0
+ceph_osd_recovery_bytes{ceph_daemon="osd.1"} 116.0
+ceph_osd_recovery_bytes{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_recovery_ops Started recovery operations
+# TYPE ceph_osd_recovery_ops counter
+ceph_osd_recovery_ops{ceph_daemon="osd.0"} 0.0
+ceph_osd_recovery_ops{ceph_daemon="osd.1"} 11.0
+ceph_osd_recovery_ops{ceph_daemon="osd.2"} 0.0
+# HELP ceph_osd_stat_bytes OSD size
+# TYPE ceph_osd_stat_bytes gauge
+ceph_osd_stat_bytes{ceph_daemon="osd.0"} 1099507433472.0
+ceph_osd_stat_bytes{ceph_daemon="osd.1"} 1099507433472.0
+ceph_osd_stat_bytes{ceph_daemon="osd.2"} 1099507433472.0
+# HELP ceph_osd_stat_bytes_used Used space
+# TYPE ceph_osd_stat_bytes_used gauge
+ceph_osd_stat_bytes_used{ceph_daemon="osd.0"} 2421391360.0
+ceph_osd_stat_bytes_used{ceph_daemon="osd.1"} 2806288384.0
+ceph_osd_stat_bytes_used{ceph_daemon="osd.2"} 2525859840.0
+# HELP ceph_rbd_mirror_replay Replays
+# TYPE ceph_rbd_mirror_replay counter
+ceph_rbd_mirror_replay{ceph_daemon="rbd-mirror.44157"} 0.0
+# HELP ceph_rbd_mirror_replay_bytes Replayed data
+# TYPE ceph_rbd_mirror_replay_bytes counter
+ceph_rbd_mirror_replay_bytes{ceph_daemon="rbd-mirror.44157"} 0.0
+# HELP ceph_rbd_mirror_replay_latency_sum Replay latency Total
+# TYPE ceph_rbd_mirror_replay_latency_sum counter
+ceph_rbd_mirror_replay_latency_sum{ceph_daemon="rbd-mirror.44157"} 0.0
+# HELP ceph_rbd_mirror_replay_latency_count Replay latency Count
+# TYPE ceph_rbd_mirror_replay_latency_count counter
+ceph_rbd_mirror_replay_latency_count{ceph_daemon="rbd-mirror.44157"} 0.0
