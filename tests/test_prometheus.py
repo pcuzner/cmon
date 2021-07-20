@@ -8,9 +8,10 @@ sys.path.append(os.path.join(os.path.dirname(parent_dir)))
 from cmon.http_api import get_prometheus_alerts, get_prometheus_data
 
 
-prometheus_url = 'http://192,168.122.92:9095'
+prometheus_url = 'http://192.168.122.92:9095'
 
 alerts = get_prometheus_alerts(prometheus_url)
+print(alerts.text)
 start = time.time()
 
 iops_query = {
@@ -22,3 +23,4 @@ iops_query = {
 }
 
 data = get_prometheus_data(prometheus_url, params=iops_query)
+print(data.text)
