@@ -567,10 +567,12 @@ class IOGraphs(CmonComponent):
 
         if r.status_code == 200:
             js = r.json()
-            raw_data = js['data']['result'][0]['values']  # iops query is a summary, so only 1 list element
-            # raw_values is a list of timestamp, value pairs, so extract just the value
-            raw_values = [float(i[1]) for i in raw_data]
-            # data_values, max_value = self._build_chart_data(raw_values)
+            results = js['data']['result']
+            if results:
+                raw_data = js['data']['result'][0]['values']  # iops query is a summary, so only 1 list element
+                # raw_values is a list of timestamp, value pairs, so extract just the value
+                raw_values = [float(i[1]) for i in raw_data]
+                # data_values, max_value = self._build_chart_data(raw_values)
         elif r.status_code == 500:
             self.prometheus_available = False
             # FIXME what else should be done here?
@@ -587,9 +589,10 @@ class IOGraphs(CmonComponent):
 
         iops_data = self._fetch_prometheus_data(self.iops_query, window_start, window_end)
         # print(iops_data)
-        iops_data_fmtd = self._build_chart_data(iops_data)
+
         # FIXME work on the error state when prometheus drops during cmon queries
-        if self.prometheus_available:
+        if self.prometheus_available and iops_data:
+            iops_data_fmtd = self._build_chart_data(iops_data)
             iops_graph = self.bar_graph('blue')
             y_axis = GraphScale(0, max(iops_data) or 1, unit='short')
             iops_graph.set_data(iops_data_fmtd, y_axis.max)
@@ -608,23 +611,34 @@ class IOGraphs(CmonComponent):
             else:
                 throughput_unit = "B/s"
 
-        return urwid.Padding(
-            urwid.LineBox(
-                urwid.Pile([
-                    urwid.Text('IOPS'),
-                    urwid.Columns([
-                        (8, urwid.BoxAdapter(iops_labels, height=self.chart_height)),
-                        urwid.BoxAdapter(iops_graph, height=self.chart_height),
+            return urwid.Padding(
+                urwid.LineBox(
+                    urwid.Pile([
+                        urwid.Text('IOPS'),
+                        urwid.Columns([
+                            (8, urwid.BoxAdapter(iops_labels, height=self.chart_height)),
+                            urwid.BoxAdapter(iops_graph, height=self.chart_height),
+                        ]),
+                        urwid.Divider(),
+                        urwid.Text(f"Throughput ({throughput_unit})"),
+                        urwid.Columns([
+                            (8, urwid.BoxAdapter(throughput_labels, height=self.chart_height)),
+                            urwid.BoxAdapter(throughput_graph, height=self.chart_height),
+                        ]),
                     ]),
-                    urwid.Divider(),
-                    urwid.Text(f"Throughput ({throughput_unit})"),
-                    urwid.Columns([
-                        (8, urwid.BoxAdapter(throughput_labels, height=self.chart_height)),
-                        urwid.BoxAdapter(throughput_graph, height=self.chart_height),
-                    ]),
-                ]),
-                title=self.title),
-        )
+                    title=self.title),
+            )
+        else:
+            return \
+                urwid.LineBox(
+                    urwid.Padding(
+                        urwid.Text(('warning', "\nQuery to prometheus resulted in no data. Unable to show IO load Activity\n\n\n\n")),
+                        align='left', left=1
+                    ),
+                    title=self.title
+                )
+
+            pass
 
     def _graphs_unavailable(self):
         return \
