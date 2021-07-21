@@ -268,12 +268,12 @@ class DataTable(urwid.WidgetWrap):
                 ])
             )
 
-        return urwid.Pile([
-            self.t_head,
-            urwid.BoxAdapter(self.t_body, height=body_height),
-            self.t_footer,
-            ]
-        )
+        return \
+            urwid.Pile([
+                self.t_head,
+                urwid.BoxAdapter(self.t_body, height=body_height),
+                self.t_footer,
+            ])
 
     def _calc_column_widths(self):
         width_map = {}
