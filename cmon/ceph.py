@@ -362,6 +362,8 @@ def get_rgw_performance(metrics: Metrics) -> List[Dict[str, Any]]:
         gw.update({
             "get_throughput": humanize.naturalsize(gw['get_b']),
             "put_throughput": humanize.naturalsize(gw['put_b']),
+            "gets": str(int(gw['gets'])),
+            "puts": str(int(gw['puts'])),
         })
 
     return rgw_data

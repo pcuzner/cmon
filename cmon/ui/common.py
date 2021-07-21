@@ -21,6 +21,7 @@ class CmonComponent(urwid.Padding):
     def __init__(self, metrics=None, visible=True):
         self.metrics = metrics
         self.visible = visible
+        self.focus_support = False
         self.colour = 'normal'
         if self.visible:
             widget = self._build_widget()
@@ -52,6 +53,7 @@ class CmonTable(CmonComponent):
 
         try:
             self.table.widget.set_focus_path(current_focus)
+            self.table._update_footer(current_focus[1])
         except IndexError:
             # if the table no longer contains active content, the old focus will not
             # apply, catch it and ignore
@@ -184,8 +186,16 @@ class TableRow(urwid.WidgetWrap):
     def _build_row(self):
         row_content = []
         for column_name in self.column_list:
+
+            data = self.row_data.get(column_name, "")
             # the text widget handles strings, so we need to cast the row_data to str to avoid attribute errors
-            row_content.append((self.width_map[column_name], urwid.Text(str(self.row_data.get(column_name, "")))))
+            # set a default
+            cell = f"{data:<{self.width_map[column_name]}}"
+            if data:
+                if data[0].isdigit():
+                    cell = f"{data:>{self.width_map[column_name]}}"
+
+            row_content.append((self.width_map[column_name], urwid.Text(cell)))  # str(self.row_data.get(column_name, "")))))
         return urwid.AttrMap(urwid.Columns(row_content, dividechars=self.col_spacing), None, focus_map='reversed')
 
 
@@ -208,9 +218,9 @@ class DataTable(urwid.WidgetWrap):
 
     dflt_max_rows = 5
 
-    def __init__(self, parent, column_list=None, data=None, description='rows', msg=None):
+    def __init__(self, parent, column_list=None, data=None, description='rows', msg=None, col_spacing=2):
         self.parent = parent
-        self.col_spacing = 2
+        self.col_spacing = col_spacing
         self.msg = msg
         self.column_list = column_list
         self.data = data
@@ -219,6 +229,8 @@ class DataTable(urwid.WidgetWrap):
 
         self.t_head = self._headings()
         self.t_body = None
+        self.t_footer = None
+        self.row = 1
 
         self.widget = self._build_table()
         super().__init__(self.widget)
@@ -232,15 +244,25 @@ class DataTable(urwid.WidgetWrap):
     def _build_rows(self) -> List[TableRow]:
         return [TableRow(self.column_list, self.width_map, self.col_spacing, r) for r in self.data]
 
+    def _build_footer(self) -> urwid.Text:
+        return \
+            urwid.Text(f"{self.row}/{len(self.data)} {self.row_description}")
+
+    def _update_footer(self, row_num: int):
+        if row_num + 1 != self.row:
+            self.row = row_num + 1  # row_num reflects the index position which starts at 0
+            self.t_footer.set_text(f"{self.row}/{len(self.data)} {self.row_description}")
+
     def _build_table(self):
         body_height = DataTable.dflt_max_rows if len(self.data) > 4 else len(self.data) + 1
         if self.data:
             rows = self._build_rows()
+            self.t_footer = self._build_footer()
             self.t_body = MyListBox(urwid.SimpleListWalker(rows))
             table_layout = [
                 self.t_head,
                 urwid.BoxAdapter(self.t_body, height=body_height),
-                urwid.Text(f"{len(self.data)} {self.row_description}")
+                self.t_footer,
             ]
         else:
             table_layout = [
@@ -261,23 +283,32 @@ class DataTable(urwid.WidgetWrap):
                     width_map[c] = col_size
         return width_map
 
-    def keypress(self, size, key):
-        if key == 'down':
-            self.t_body.focus_next()
-            logger.info(self.widget.get_focus_widgets())
-        if key == 'up':
-
+    def _move(self, direction: str):
+        if direction == 'up':
             self.t_body.focus_previous()
-            logger.info(self.widget.get_focus_path())
+            self._update_footer(self.widget.get_focus_path()[1])
+        elif direction == 'down':
+            self.t_body.focus_next()
+            self._update_footer(self.widget.get_focus_path()[1])
+
+    def keypress(self, size, key):
+        logger.debug(f"processing keypress {key} in Datatable")
+        if self.t_body:
+            if key == 'down':
+                self._move('down')
+            elif key == 'up':
+                self._move('up')
+
         self.parent.keypress(key)
 
     def mouse_event(self, size, event, button, col, row, wrow):
         # print(event) # "mouse press"
         # print(button) # button no. 1-5, 1=left, 2=middle, 3=right, 4-wheepup, 5 wheel-down
+        logger.debug(f"processing mouse action in Datatable event={event} button={button}")
         if event == 'mouse press':
             if button == 4:
-                # up
-                self.t_body.focus_previous()
+                self._move('up')
+
             elif button == 5:
-                # down
-                self.t_body.focus_next()
+                self._move('down')
+

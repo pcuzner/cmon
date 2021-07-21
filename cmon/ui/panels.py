@@ -237,9 +237,13 @@ class PrometheusAlerts(CmonComponent):
         self.prometheus_url = parent.prometheus_url
         self.t_head = self._headings()
         self.t_body = None
+        self.t_footer = None
+        self.row = 1
         self.table = None
+        self.alert_data = []
         # self.widget = self._build_widget()
         super().__init__(visible=parent.config.panel_alerts)
+        self.focus_support = True
 
     def _headings(self):
         cols = []
@@ -249,6 +253,13 @@ class PrometheusAlerts(CmonComponent):
             else:
                 cols.append(urwid.Text(name.capitalize()))
         return urwid.Columns(cols, dividechars=self.column_spacing)
+
+    def _update_footer(self, row_num: int):
+        logger.info("in alerts panel footer update call")
+        if row_num + 1 != self.row:
+            logger.info("updating row count")
+            self.row = row_num + 1
+            self.t_footer.set_text(f"{self.row}/{len(self.alert_data)} alerts")
 
     def _build_rows(self, data):
         rows = []
@@ -287,8 +298,8 @@ class PrometheusAlerts(CmonComponent):
 
         return rows
 
-    def _build_body(self, alert_data: List[Dict[str, Any]]):
-        return MyListBox(urwid.SimpleListWalker(self._build_rows(alert_data)))
+    def _build_body(self):  # , alert_data: List[Dict[str, Any]]):
+        return MyListBox(urwid.SimpleListWalker(self._build_rows(self.alert_data)))
 
     def _build_widget(self):
         if self.visible:
@@ -302,30 +313,33 @@ class PrometheusAlerts(CmonComponent):
 
     def _alerts_table(self):
         logger.info("fetching alert state")
-        footer = urwid.Text("No alerts")
+        self.t_footer = urwid.Text("No alerts")
         self.t_body = None
-        alert_data = None
+        self.alert_data = []
         r = get_prometheus_alerts(self.prometheus_url)
         if r.status_code == 200:
             js = r.json()
-            alert_data = js['data'].get('alerts', [])
-            if alert_data:
-                self.t_body = self._build_body(alert_data)
-                footer = urwid.Text(f"{len(alert_data)} alerts")
+            self.alert_data = js['data'].get('alerts', [])
+            if self.alert_data:
+                self.t_body = self._build_body()
+                self.t_footer = urwid.Text(f"{self.row}/{len(self.alert_data)} alerts")
         elif r.status_code == 500:
-            footer = urwid.Text(('error', f'Unable to retrieve alerts from {self.prometheus_url}'))
+            self.t_footer = urwid.Text(('error', f'Unable to retrieve alerts from {self.prometheus_url}'))
 
         table_layout = [self.t_head]
         if self.t_body:
             table_layout.append(
                 urwid.BoxAdapter(self.t_body, height=self.table_height)
             )
-        table_layout.append(footer)
+        # table_layout.append(self.t_footer)
         self.table = urwid.Pile(table_layout)
         return urwid.Padding(
             urwid.LineBox(
                 urwid.Padding(
-                    self.table,
+                        urwid.Pile([
+                            self.table,
+                            self.t_footer,
+                        ]),
                     left=1,
                     right=1
                 ),
@@ -344,11 +358,23 @@ class PrometheusAlerts(CmonComponent):
                 title=self.title
             )
 
-    def keypress(self, size, key):
-        if key == 'down':
-            self.t_body.focus_next()
-        if key == 'up':
+    def _move(self, direction:str):
+        if direction == 'up':
             self.t_body.focus_previous()
+            self._update_footer(self.table.get_focus_path()[1])
+        elif direction == 'down':
+            self.t_body.focus_next()
+            self._update_footer(self.table.get_focus_path()[1])
+
+    def keypress(self, size, key):
+        logger.debug("processing keypress in alerts table")
+        if self.t_body:
+            if key == 'up':
+                self._move('up')
+                # self.t_body.focus_previous()
+            if key == 'down':
+                self._move('down')
+                # self.t_body.focus_next()
 
         self.parent.keypress(key)
 
@@ -358,16 +384,21 @@ class PrometheusAlerts(CmonComponent):
         if event == 'mouse press':
             if button == 4:
                 # up
-                self.t_body.focus_previous()
+                self._move('up')
+                # self.t_body.focus_previous()
+                # self._update_footer(self.table.get_focus_path()[1])
             elif button == 5:
                 # down
-                self.t_body.focus_next()
+                self._move('down')
+                # self.t_body.focus_next()
+                # self._update_footer(self.table.get_focus_path()[1])
 
     def update(self):
         logger.debug("in alerts update method")
         current_focus = self.table.get_focus_path()
         self.original_widget = self._build_widget()
         self.table.set_focus_path(current_focus)
+        self._update_footer(current_focus[1])
 
 
 class PoolInfo(CmonTable):
@@ -378,6 +409,7 @@ class PoolInfo(CmonTable):
         self.parent = parent
         self.table = None
         super().__init__(metrics=parent.metrics, visible=parent.config.panel_pools)
+        self.focus_support = True
 
     def _build_table(self):
         pool_data = get_pool_summary(self.parent.metrics)
@@ -461,6 +493,7 @@ class RBDPerformance(CmonTable):
         self.parent = parent
         self.table = None
         super().__init__(metrics=parent.metrics, visible=parent.config.panel_rbds)
+        self.focus_support = True
 
     def _build_table(self):
 
@@ -659,6 +692,7 @@ class RGWPerformance(CmonTable):
         self.parent = parent
         self.table = None
         super().__init__(metrics=parent.metrics, visible=parent.config.panel_rgws)
+        self.focus_support = True
 
     def _build_table(self):
         rgw_data = get_rgw_performance(self.parent.metrics)
@@ -671,7 +705,9 @@ class RGWPerformance(CmonTable):
             column_list=RGWPerformance.column_list,
             data=rgw_data,
             msg=msg,
-            description='RGW instance(s)')
+            description='RGW instance(s)',
+            col_spacing=3
+        )
 
     def _build_widget(self):
         self._build_table()
