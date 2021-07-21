@@ -109,6 +109,8 @@ Here's a comparison of the images sizes<sup>1</sup>
 ## Troubleshooting
 1. *"My graphs show a saw-tooth pattern with workload appearing to stop every few seconds...what's that about?"*
   Check your refresh-interval is correct - this pattern of regular lapses in data is normally when you're refresh-interval is smaller than the interval used in mgr/prometheus and the prometheus scrape job.
+2. *"My IO load panel just says prometheus returned no data, what do I do?"*
+   This indicates that the mgr/prometheus endpoint is not being scraped, so there is no ceph_* related metrics for the query to return. Check that port 9283 on the mgr is listening, and that the prometheus configuration has a job to scrape from ceph configured correctly (IP/hostname and port are correct?)
 
 
 ## Known Issues
@@ -116,19 +118,23 @@ Here's a comparison of the images sizes<sup>1</sup>
 
 
 ## Futures
-- improve the table layout to show row number and total
+- add an about (?) panel to overlay release, and compatibility matrix (what panels work with what release)
+- tab (change focus) between the optional panels
+- make the help screen scrollable (up/down/scroll wheel)
 - enable cmon to handle multiple clusters, and switch between them
   * change the configuration file format. Allow a list of servers and introduce a nickname for selection
   * Add a pulldown on the header widget to provide quick switch across clusters
   * Add an ALL nickname to show a different multi-cluster aggregation of statistics - activity, capacity, health
-- redesign the widget layouts to use gridflow and make all panels optional?
+- allow the container to use a token in the header of the prometheus calls to enable the tool to deal with proxied prometheus instances, like OCP
 - consider predetermined layouts so when a component is toggled the whole layout changes - maybe a bit freaky
-- add 'o' OSD panel (overlay) to detail all OSDs in a table, with a summary panel embedded
 - add 'h' Host panel to show a host breakdown - ceph components and current cpu/ram load by host
+- add 'o' OSD panel (overlay) to detail all OSDs in a table, with a summary panel embedded
 - switch to alertmanager url for the alerts table so we can see alerts that are silenced
 - add read:write bias indicator? Useful or not? Would need to be based on prometheus data to cover a longer period
+- Singlestat panel for recovery active?
+
 
 
 ## Maybe's
 - consider a metric history based on the delta values as an alternative to the prometheus query
-- tab (change focus) between the tables?
+

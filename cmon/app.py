@@ -119,6 +119,13 @@ class CmonApp:
 
         self.refresh_timer = RefreshTimer(self.refresh_interval)
 
+        self.toggled_panels = urwid.Pile([
+            self.alerts,
+            self.pool_info,
+            self.rbd_performance,
+            self.rgw_performance,
+        ])
+
         self.ptr = 0
 
     def _build_ui(self):
@@ -148,10 +155,11 @@ class CmonApp:
                         self.capacity])),
                     self.io_load_graphs
                 ], dividechars=0),
-                self.alerts,
-                self.pool_info,
-                self.rbd_performance,
-                self.rgw_performance,
+                self.toggled_panels,
+                # self.alerts,
+                # self.pool_info,
+                # self.rbd_performance,
+                # self.rgw_performance,
             ]),
             'top')
 
@@ -161,11 +169,41 @@ class CmonApp:
             footer=footer)
 
     def _manage_panels(self, panel):
+
         panel.visible = not panel.visible
         if panel.visible:
             panel.show()
+            if panel.focus_support:
+                self.toggled_panels.set_focus(panel)
         else:
             panel.hide()
+
+    def _switch_panel(self):
+
+        current = self.toggled_panels.get_focus()
+        logger.debug(f"toggled panels pile, current focus is {current}")
+
+        # contents returns  MonitoredFocusList containing a tuple of (object, weight)
+        active_panels = [p[0] for p in self.toggled_panels.contents if p[0].visible]
+        if len(active_panels) == 0:
+            logger.debug("tab not relevant - no optional panels active")
+            return
+        if len(active_panels) == 1:
+            logger.debug("tab pressed, but ignored, since there is only one panel shown")
+            return
+
+        logger.debug(f"active panels are {active_panels}")
+
+        panel_idx = active_panels.index(current) + 1
+
+        if panel_idx > len(active_panels) - 1:
+            logger.debug("panel idx is too big, resetting")
+            next_panel = active_panels[0]
+        else:
+            logger.debug("panel idx ok to use")
+            next_panel = active_panels[panel_idx]
+
+        self.toggled_panels.set_focus(next_panel)
 
     def keypress(self, key):
         if key in ('q', 'Q'):
@@ -190,17 +228,21 @@ class CmonApp:
             if key in ('p', 'P'):
                 self._manage_panels(self.pool_info)
 
-            if key in ('r', 'R'):
+            elif key in ('r', 'R'):
                 self._manage_panels(self.rbd_performance)
 
-            if key in ('i', 'I'):
+            elif key in ('i', 'I'):
                 self._manage_panels(self.io_load_graphs)
 
-            if key in ('a', 'A'):
+            elif key in ('a', 'A'):
                 self._manage_panels(self.alerts)
 
-            if key in ('g', 'G'):
+            elif key in ('g', 'G'):
                 self._manage_panels(self.rgw_performance)
+
+            elif key == 'tab':
+                logger.info("main loop processing a tab keypress")
+                self._switch_panel()
 
     @timeit
     def _update_panels(self):
