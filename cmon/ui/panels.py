@@ -255,9 +255,8 @@ class PrometheusAlerts(CmonComponent):
         return urwid.Columns(cols, dividechars=self.column_spacing)
 
     def _update_footer(self, row_num: int):
-        logger.info("in alerts panel footer update call")
+        logger.debug("in alerts panel footer update call")
         if row_num + 1 != self.row:
-            logger.info("updating row count")
             self.row = row_num + 1
             self.t_footer.set_text(f"{self.row}/{len(self.alert_data)} alerts")
 
@@ -336,10 +335,10 @@ class PrometheusAlerts(CmonComponent):
         return urwid.Padding(
             urwid.LineBox(
                 urwid.Padding(
-                        urwid.Pile([
-                            self.table,
-                            self.t_footer,
-                        ]),
+                    urwid.Pile([
+                        self.table,
+                        self.t_footer,
+                    ]),
                     left=1,
                     right=1
                 ),
@@ -358,7 +357,7 @@ class PrometheusAlerts(CmonComponent):
                 title=self.title
             )
 
-    def _move(self, direction:str):
+    def _move(self, direction: str):
         if direction == 'up':
             self.t_body.focus_previous()
             self._update_footer(self.table.get_focus_path()[1])
@@ -515,7 +514,7 @@ class RBDPerformance(CmonTable):
 
         self.table = DataTable(
             self.parent,
-            column_list=self.column_list,
+            column_list=RBDPerformance.column_list,
             data=sorted_rbd_data,
             msg=msg,
             description='rbd image(s)')
@@ -530,7 +529,7 @@ class RBDPerformance(CmonTable):
                 ),
                 title=self.title),
             align='left',
-            width=('relative', 100)
+            width='pack'
         )
 
 

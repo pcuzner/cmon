@@ -47,7 +47,7 @@ class CmonTable(CmonComponent):
     table = None
 
     def update(self):
-        logger.debug("in pool_info update method")
+        logger.debug("in CmonTable update method")
         current_focus = self.table.widget.get_focus_path()
         self.original_widget = self._build_widget()
 
@@ -187,7 +187,7 @@ class TableRow(urwid.WidgetWrap):
         row_content = []
         for column_name in self.column_list:
 
-            data = self.row_data.get(column_name, "")
+            data = str(self.row_data.get(column_name, ""))
             # the text widget handles strings, so we need to cast the row_data to str to avoid attribute errors
             # set a default
             cell = f"{data:<{self.width_map[column_name]}}"
@@ -259,18 +259,21 @@ class DataTable(urwid.WidgetWrap):
             rows = self._build_rows()
             self.t_footer = self._build_footer()
             self.t_body = MyListBox(urwid.SimpleListWalker(rows))
-            table_layout = [
-                self.t_head,
-                urwid.BoxAdapter(self.t_body, height=body_height),
-                self.t_footer,
-            ]
+
         else:
-            table_layout = [
-                urwid.Divider(" "),
-                urwid.Text(('warning', self.msg)),
-                urwid.Divider(" ")
+            self.t_footer = urwid.Divider(" ")
+            self.t_body = MyListBox(
+                urwid.SimpleListWalker([
+                    urwid.Text(('warning', self.msg))
+                ])
+            )
+
+        return urwid.Pile([
+            self.t_head,
+            urwid.BoxAdapter(self.t_body, height=body_height),
+            self.t_footer,
             ]
-        return urwid.Pile(table_layout)
+        )
 
     def _calc_column_widths(self):
         width_map = {}
@@ -311,4 +314,3 @@ class DataTable(urwid.WidgetWrap):
 
             elif button == 5:
                 self._move('down')
-

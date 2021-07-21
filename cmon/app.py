@@ -202,7 +202,7 @@ class CmonApp:
         else:
             logger.debug("panel idx ok to use")
             next_panel = active_panels[panel_idx]
-
+        logger.info(f"setting active focus to {next_panel}")
         self.toggled_panels.set_focus(next_panel)
 
     def keypress(self, key):

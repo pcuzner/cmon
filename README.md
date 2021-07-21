@@ -38,6 +38,8 @@ There are a several methods for installing cmon.
 
 3. run locally from a directory
    - grab the source
+   - install the pre-requisites
+   - run cmon.py
 
 
 ## Usage
@@ -119,7 +121,6 @@ Here's a comparison of the images sizes<sup>1</sup>
 
 ## Futures
 - add an about (?) panel to overlay release, and compatibility matrix (what panels work with what release)
-- tab (change focus) between the optional panels
 - make the help screen scrollable (up/down/scroll wheel)
 - enable cmon to handle multiple clusters, and switch between them
   * change the configuration file format. Allow a list of servers and introduce a nickname for selection
@@ -130,7 +131,6 @@ Here's a comparison of the images sizes<sup>1</sup>
 - add 'h' Host panel to show a host breakdown - ceph components and current cpu/ram load by host
 - add 'o' OSD panel (overlay) to detail all OSDs in a table, with a summary panel embedded
 - switch to alertmanager url for the alerts table so we can see alerts that are silenced
-- add read:write bias indicator? Useful or not? Would need to be based on prometheus data to cover a longer period
 - Singlestat panel for recovery active?
 
 
