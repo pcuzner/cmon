@@ -1,8 +1,8 @@
 
-import urwid
+import urwid  # type: ignore
 import logging
 
-from typing import List
+from typing import List, Tuple, Union
 
 logger = logging.getLogger(__name__)
 
@@ -38,13 +38,30 @@ class CmonComponent(urwid.Padding):
     def _build_widget(self):
         return urwid.Padding(urwid.Text(""))
 
+    def _build_table(self):
+        raise NotImplementedError("build_table called by not provided")
+
     def update(self):
         self.original_widget = self._build_widget()
 
 
 class CmonTable(CmonComponent):
 
-    table = None
+    # table: = None
+
+    def _build_widget(self):
+        self._build_table()
+        return urwid.Padding(
+            urwid.LineBox(
+                urwid.Padding(
+                    self.table,
+                    left=1,
+                    right=1
+                ),
+                title=self.title),
+            align='left',
+            width='pack'
+        )
 
     def update(self):
         logger.debug("in CmonTable update method")
@@ -69,7 +86,8 @@ class BarChart(urwid.BarGraph):
 
     def __init__(self, scheme: str, smooth: bool = True):
         if scheme not in BarChart.colour_schemes:
-            raise ValueError(f"Attempted to create a barchart with an unknown color scheme: {scheme}")
+            raise ValueError(
+                f"Attempted to create a barchart with an unknown color scheme: {scheme}")
         self.colours = BarChart.colour_schemes[scheme]
         satt = None
         c1, c2 = BarChart.colour_schemes[scheme]
@@ -117,7 +135,7 @@ class HStackBar(urwid.Text):
         charwidth = total / self.width
         # stepwidth = charwidth / len(self.chars)
 
-        self.sparktext = []
+        self.sparktext: Union[str, List[Tuple[str, str]]] = []
 
         position = 0
         carryover = 0
@@ -195,7 +213,8 @@ class TableRow(urwid.WidgetWrap):
                 if data[0].isdigit():
                     cell = f"{data:>{self.width_map[column_name]}}"
 
-            row_content.append((self.width_map[column_name], urwid.Text(cell)))  # str(self.row_data.get(column_name, "")))))
+            # str(self.row_data.get(column_name, "")))))
+            row_content.append((self.width_map[column_name], urwid.Text(cell)))
         return urwid.AttrMap(urwid.Columns(row_content, dividechars=self.col_spacing), None, focus_map='reversed')
 
 
@@ -228,8 +247,8 @@ class DataTable(urwid.WidgetWrap):
         self.row_description = description
 
         self.t_head = self._headings()
-        self.t_body = None
-        self.t_footer = None
+        self.t_body: MyListBox
+        self.t_footer: urwid.Text
         self.row = 1
 
         self.widget = self._build_table()

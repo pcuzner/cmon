@@ -1,4 +1,4 @@
-import urwid
+import urwid  # type: ignore
 import logging
 
 from .common import CmonComponent, Icon
@@ -90,13 +90,15 @@ class HelpInformation(CmonComponent):
 
         ]
 
-        content = urwid.SimpleListWalker([urwid.AttrMap(widget, None, "normal") for widget in help_content])
+        content = urwid.SimpleListWalker(
+            [urwid.AttrMap(widget, None, "normal") for widget in help_content])
 
         return \
             urwid.LineBox(
                 urwid.Filler(
                     urwid.Padding(
-                        urwid.BoxAdapter(urwid.ListBox(content), height=HelpInformation.page_height),
+                        urwid.BoxAdapter(urwid.ListBox(content),
+                                         height=HelpInformation.page_height),
                         left=1,
                         right=1
                     ),
