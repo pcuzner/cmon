@@ -1,10 +1,10 @@
-import humanize
+import humanize  # type: ignore
 import logging
 
-from typing import Dict, List, Any, Union, Set
+from typing import Dict, List, Any
 
 from .utils import relabel, merge_dict_lists_by_key
-from .mgr_prometheus import Metrics, Metric, sum_metrics
+from .mgr_prometheus import Metrics, sum_metrics
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ PG_STATE_MAP = {
 
 class CategoryTotal:
 
-    def __init__(self, total: int, pct: float = 0):
+    def __init__(self, total: float, pct: float = 0):
         self.total = total
         self.pct = pct
 
@@ -36,22 +36,29 @@ class CategoryTotal:
         return f"({self.total}, {self.pct})"
 
 
-def get_pool_summary(metrics: Dict[str, Metric]) -> List[Dict[str, str]]:
+def get_pool_summary(metrics: Metrics) -> List[Dict[str, str]]:
 
     pool_data = fetch_metric_list(metrics, 'ceph_pool_metadata')
     updates = []
     updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_rd'), 'delta', 'pool_rd')])
     updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_wr'), 'delta', 'pool_wr')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_rd_bytes'), 'delta', 'pool_rd_bytes')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_wr_bytes'), 'delta', 'pool_wr_bytes')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_percent_used'), 'value', 'percent_used')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_compress_under_bytes'), 'value', 'compress_under_bytes')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_compress_bytes_used'), 'value', 'compress_bytes_used')])
+    updates.extend(
+        [relabel(fetch_metric_list(metrics, 'ceph_pool_rd_bytes'), 'delta', 'pool_rd_bytes')])
+    updates.extend(
+        [relabel(fetch_metric_list(metrics, 'ceph_pool_wr_bytes'), 'delta', 'pool_wr_bytes')])
+    updates.extend(
+        [relabel(fetch_metric_list(metrics, 'ceph_pool_percent_used'), 'value', 'percent_used')])
+    updates.extend([relabel(fetch_metric_list(
+        metrics, 'ceph_pool_compress_under_bytes'), 'value', 'compress_under_bytes')])
+    updates.extend([relabel(fetch_metric_list(
+        metrics, 'ceph_pool_compress_bytes_used'), 'value', 'compress_bytes_used')])
     updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pg_total'), 'value', 'pg_count')])
     updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pg_active'), 'value', 'pg_active')])
     updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_stored'), 'value', 'stored_bytes')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_recovering_objects_per_sec'), 'value', 'recovery_rate')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_max_avail'), 'value', 'max_avail_bytes')])
+    updates.extend([relabel(fetch_metric_list(
+        metrics, 'ceph_pool_recovering_objects_per_sec'), 'value', 'recovery_rate')])
+    updates.extend(
+        [relabel(fetch_metric_list(metrics, 'ceph_pool_max_avail'), 'value', 'max_avail_bytes')])
     # TODO add more pool info here
     merge_dict_lists_by_key(pool_data, updates, ['pool_id'])
     for pool in pool_data:
@@ -69,7 +76,8 @@ def get_pool_summary(metrics: Dict[str, Metric]) -> List[Dict[str, str]]:
         pool['stored'] = humanize.naturalsize(pool['stored_bytes'], binary=True)
         pool['avail'] = humanize.naturalsize(pool['max_avail_bytes'], binary=True)
         pool['PGs'] = str(int(pool['pg_count']))
-        pool['savings'] = humanize.naturalsize(pool['compress_under_bytes'] - pool['compress_bytes_used'], binary=True)
+        pool['savings'] = humanize.naturalsize(
+            float(pool['compress_under_bytes']) - float(pool['compress_bytes_used']), binary=True)
         pool['health'] = 'OK' if pool['recovery_rate'] == 0 else 'RECOVERING'
         if 'percent_used' in pool:
             # Pacific
@@ -82,16 +90,18 @@ def get_pool_summary(metrics: Dict[str, Metric]) -> List[Dict[str, str]]:
 
 
 def create_osd_summary(metrics: Metrics) -> Dict[str, Any]:
-    osds = metrics['ceph_osd_metadata'].dump_to_list()
+    osds = fetch_metric_list(metrics, 'ceph_osd_metadata')
     updates = []
-    updates.extend([relabel(metrics['ceph_osd_up'].dump_to_list(), 'value', 'up')])
-    updates.extend([relabel(metrics['ceph_osd_in'].dump_to_list(), 'value', 'in')])
-    updates.extend([relabel(metrics['ceph_osd_stat_bytes'].dump_to_list(), 'value', 'size_bytes')])
-    updates.extend([relabel(metrics['ceph_osd_stat_bytes_used'].dump_to_list(), 'value', 'bytes_used')])
+    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_osd_up'), 'value', 'up')])
+    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_osd_in'), 'value', 'in')])
+    updates.extend(
+        [relabel(fetch_metric_list(metrics, 'ceph_osd_stat_bytes'), 'value', 'size_bytes')])
+    updates.extend(
+        [relabel(fetch_metric_list(metrics, 'ceph_osd_stat_bytes_used'), 'value', 'bytes_used')])
     return merge_dict_lists_by_key(osds, updates, ['ceph_daemon'])
 
 
-def fetch_metric_list(metrics: Metrics, metric_name: str) -> List[Dict[str, Any]]:
+def fetch_metric_list(metrics: Metrics, metric_name: str) -> List[Dict[str, str]]:
     if metric_name in metrics.data:
         return metrics.data[metric_name].dump_to_list()
     else:
@@ -101,7 +111,10 @@ def fetch_metric_list(metrics: Metrics, metric_name: str) -> List[Dict[str, Any]
 def get_inventory(metrics: Metrics) -> Dict[str, Any]:
 
     def _summarize(data):
-        summary = {"up": 0, "down": 0}
+        summary = {
+            "up": 0,
+            "down": 0
+        }
         for d in data:
             if d['value'] == 1:
                 summary['up'] += 1
@@ -109,8 +122,8 @@ def get_inventory(metrics: Metrics) -> Dict[str, Any]:
                 summary['down'] += 1
         return summary
 
-    def _summarize_versions(metadata: List[Dict[str, Any]]) -> Dict[str, Union[Set, Dict[str, int]]]:
-        daemon_lookup = {
+    def _summarize_versions(metadata: List[Dict[str, Any]]) -> Dict[str, Any]:
+        daemon_lookup: Dict[str, Any] = {
             "_all_": set(),
         }
         for daemon in metadata:
@@ -137,7 +150,7 @@ def get_inventory(metrics: Metrics) -> Dict[str, Any]:
 
         return daemon_lookup
 
-    states = {}
+    states: Dict[str, Any] = {}
     mon_data = fetch_metric_list(metrics, 'ceph_mon_metadata')
     mgr_data = fetch_metric_list(metrics, 'ceph_mgr_metadata')
     osd_data = fetch_metric_list(metrics, 'ceph_osd_up')
@@ -147,7 +160,8 @@ def get_inventory(metrics: Metrics) -> Dict[str, Any]:
     cephfs_mirror_data = fetch_metric_list(metrics, 'ceph_cephfs_mirror_metadata')
     iscsi_data = fetch_metric_list(metrics, 'ceph_iscsi_metadata')
 
-    daemon_metadata = mon_data + mgr_data + osd_data + mds_data + rgw_data + rbd_mirror_data + cephfs_mirror_data
+    daemon_metadata = mon_data + mgr_data + osd_data + \
+        mds_data + rgw_data + rbd_mirror_data + cephfs_mirror_data
     states['versions'] = _summarize_versions(daemon_metadata)
     states['mon'] = _summarize(mon_data)
     states['mgr'] = _summarize(mgr_data)
@@ -176,14 +190,14 @@ def get_inventory(metrics: Metrics) -> Dict[str, Any]:
 
 def get_capacity_info(metrics: Metrics) -> Dict[str, float]:
     total_data = fetch_metric_list(metrics, 'ceph_cluster_total_bytes')
-    total = 0
+    total: float = 0
     if total_data:
-        total = total_data[0].get('value')
+        total = float(total_data[0].get('value', 0))
 
-    used = 0
+    used: float = 0
     used_data = fetch_metric_list(metrics, 'ceph_cluster_total_used_bytes')
     if used_data:
-        used = used_data[0].get('value')
+        used = float(used_data[0].get('value', 0))
 
     disks = fetch_metric_list(metrics, 'ceph_disk_occupation')
     total_disks = 0
@@ -207,8 +221,10 @@ def get_capacity_info(metrics: Metrics) -> Dict[str, float]:
 
     pool_metadata = fetch_metric_list(metrics, 'ceph_pool_metadata')
     updates = []
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_compress_under_bytes'), 'value', 'compress_under_bytes')])
-    updates.extend([relabel(fetch_metric_list(metrics, 'ceph_pool_compress_bytes_used'), 'value', 'compress_used_bytes')])
+    updates.extend([relabel(fetch_metric_list(
+        metrics, 'ceph_pool_compress_under_bytes'), 'value', 'compress_under_bytes')])
+    updates.extend([relabel(fetch_metric_list(
+        metrics, 'ceph_pool_compress_bytes_used'), 'value', 'compress_used_bytes')])
 
     pool_data = merge_dict_lists_by_key(pool_metadata, updates, ['pool_id'])
 
@@ -234,7 +250,7 @@ def get_capacity_info(metrics: Metrics) -> Dict[str, float]:
 def get_health(metrics: Metrics) -> str:
     health = fetch_metric_list(metrics, 'ceph_health_status')[0]
     logger.debug(f"health status : {health}")
-    return HEALTH_MAP[health['value']]
+    return HEALTH_MAP[float(health['value'])]
 
 
 def get_total_iops(metrics: Metrics) -> float:
@@ -255,7 +271,7 @@ def get_pg_summary(metrics: Metrics) -> Dict[str, CategoryTotal]:
 
     pg_overview = {}
 
-    def _fetch_pg_state_total(pg_metric_name: str) -> int:
+    def _fetch_pg_state_total(pg_metric_name: str) -> float:
         if pg_metric_name in metrics.data:
             return sum_metrics(metrics.data[pg_metric_name], sum_by_variable='value')
         else:
@@ -269,15 +285,16 @@ def get_pg_summary(metrics: Metrics) -> Dict[str, CategoryTotal]:
 
     for category in PG_STATE_MAP:
         pg_states = PG_STATE_MAP[category]
-        category_total = 0
+        category_total: float = 0
         for pg_name in pg_states:
             category_total += _fetch_pg_state_total(pg_name)
         if category_total > 0:
-            pg_overview[category] = CategoryTotal(category_total, ((category_total / pg_total) * 100))
+            pg_overview[category] = CategoryTotal(
+                category_total, ((category_total / pg_total) * 100))
 
     # pg's can be in a multiple states, so we just look at the discrete settings and lump
     # everything else into the warning category
-    all_categories = 0
+    all_categories: float = 0
     for category in pg_overview:
         all_categories += pg_overview[category].total
     diff = pg_total - all_categories
@@ -323,16 +340,19 @@ def get_rbd_performance(metrics: Metrics) -> List[Dict[str, Any]]:
                 else:
                     # every rbd should have an entry so this is weird, and indicates a problem in the
                     # ceph exporter (mgr/prometheus)
-                    raise ValueError(f"processing metric {m}, encountered a mismatch for entry {key}")
+                    raise ValueError(
+                        f"processing metric {m}, encountered a mismatch for entry {key}")
 
         # now calculate the read and write latencies, and handle formatting
         for key in lookup:
             item = lookup[key]
 
             total_ops = int(item['read_ops'] + item['write_ops'])
-            rlat = item['read_latency_count'] / item['read_latency_sum'] if item['read_latency_count'] > 0 else 0
+            rlat = item['read_latency_count'] / \
+                item['read_latency_sum'] if item['read_latency_count'] > 0 else 0
             read_latency = f"{rlat*1000000:>7.2f}"
-            wlat = item['write_latency_count'] / item['write_latency_sum'] if item['write_latency_count'] > 0 else 0
+            wlat = item['write_latency_count'] / \
+                item['write_latency_sum'] if item['write_latency_count'] > 0 else 0
             write_latency = f"{wlat*1000000:>7.2f}"
             item.update({
                 "total_ops": total_ops,
@@ -357,7 +377,8 @@ def get_rgw_performance(metrics: Metrics) -> List[Dict[str, Any]]:
     updates.extend([relabel(fetch_metric_list(metrics, 'ceph_rgw_get_b'), "delta", "get_b")])
     updates.extend([relabel(fetch_metric_list(metrics, 'ceph_rgw_put_b'), "delta", "put_b")])
 
-    rgw_data = merge_dict_lists_by_key(base_list=base_list, updates=updates, key_names=['ceph_daemon'])
+    rgw_data = merge_dict_lists_by_key(
+        base_list=base_list, updates=updates, key_names=['ceph_daemon'])
     for gw in rgw_data:
         gw.update({
             "get_throughput": humanize.naturalsize(gw['get_b']),
