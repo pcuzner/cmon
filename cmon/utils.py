@@ -3,10 +3,10 @@ import time
 import math
 import logging
 import socket
-import humanize
+import humanize  # type: ignore
 import datetime
 
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any, Optional
 from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
@@ -46,7 +46,7 @@ class Filter:
 
     def __init__(self, f_spec: Dict[str, str]):
         if 'value' in f_spec:
-            self.value = float(f_spec['value'])
+            self.value: Optional[float] = float(f_spec['value'])
         else:
             self.value = None
         for k in f_spec:
@@ -55,7 +55,7 @@ class Filter:
 
 
 def count_unique(data, var_name):
-    summary = {}
+    summary: Dict[str, Any] = {}
     for i in data:
         summary_key = i[var_name]
         if summary_key in summary:
@@ -107,7 +107,8 @@ class GraphScale:
 
     def __init__(self, minv, maxv, unit: str = 'short'):
         if unit not in GraphScale.valid_units:
-            raise ValueError(f"Invalid unit type received ({unit}): needs to be one of {GraphScale.valid_units}")
+            raise ValueError(
+                f"Invalid unit type received ({unit}): needs to be one of {GraphScale.valid_units}")
 
         self.max_ticks = 3
         self.tick_spacing = 0
@@ -159,7 +160,7 @@ class GraphScale:
     def nice_number(self, lst, rround):
         self.lst = lst
         exponent = 0  # exponent of range
-        fraction = 0  # fractional part of range
+        fraction: float = 0  # fractional part of range
         nice_fraction = 0  # nice, rounded fraction
 
         exponent = math.floor(math.log10(self.lst))
