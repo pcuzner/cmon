@@ -4,12 +4,12 @@ import sys
 import logging
 
 try:
-    import urwid
+    import urwid  # type: ignore
 except ImportError:
     urwid = None
 
 try:
-    import humanize
+    import humanize  # type: ignore
 except ImportError:
     humanize = None
 
@@ -120,7 +120,7 @@ def get_parser():
     return parser
 
 
-def check_ready(config) -> List[str]:
+def check_ready(config: Config) -> List[str]:
 
     problems = []
     if not urwid:
@@ -130,7 +130,7 @@ def check_ready(config) -> List[str]:
 
     if config.prometheus_url:
         if not endpoint_available(f"{config.prometheus_url}/api/v1/status/config"):
-            problems.append(f"Unable to access prometheus endpoint at {config.prometheus_url}")
+            logger.warning(f"Unable to access prometheus endpoint at {config.prometheus_url}")
 
     if not config.ceph_url:
         problems.append("you must supply a ceph_url parameter for the mgr/prometheus connection")
@@ -148,7 +148,15 @@ def main():
             print(p)
         sys.exit(1)
 
-    metrics = Metrics(target_url=config.ceph_url, scrape_interval=config.refresh_interval) #, scrape_interval=10)
+    # keep mypy happy on the instantiate of the Metrics instance
+    target_url = getattr(config, 'ceph_url')
+    scrape_interval = getattr(config, 'refresh_interval')
+
+    metrics = Metrics(
+        target_url=target_url,
+        scrape_interval=scrape_interval
+    )
+
     metrics_usable = metrics.build()
 
     if metrics_usable:

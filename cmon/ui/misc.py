@@ -1,5 +1,5 @@
 
-import urwid
+import urwid  # type: ignore
 import logging
 
 from .common import CmonComponent

@@ -6,3 +6,4 @@ prometheus_url: http://192.168.122.92:9095
 #panel_alerts: false
 #panel_pools: false
 #panel_rbds: false
+#panel_rgws: false

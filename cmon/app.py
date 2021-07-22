@@ -1,12 +1,11 @@
-from cmon.ui.panels import RGWPerformance
-import urwid
+import urwid  # type: ignore
 import sys
 import time
 import logging
 
 from urllib.parse import urlparse
 
-from cmon import __version__ as cmon_version
+from cmon import __version__ as cmon_version  # type: ignore
 from .ui import (
     Inventory,
     Health,
@@ -19,7 +18,8 @@ from .ui import (
     PoolInfo,
     PGStatus,
     RBDPerformance,
-    RefreshTimer
+    RefreshTimer,
+    RGWPerformance
 )
 
 from .utils import timeit
@@ -82,7 +82,7 @@ class CmonApp:
         self.top_rbd_count = 10
         self.refresh_interval = self.config.refresh_interval
         self.refresh_countdown = self.refresh_interval
-        self.loop = None
+        self.loop: urwid.MainLoop
         self.mgr_ip = self.config.ceph_url
         self.prometheus_url = self.config.prometheus_url or None
         self.metrics = metrics   # add the metrics object here!
@@ -202,7 +202,7 @@ class CmonApp:
         else:
             logger.debug("panel idx ok to use")
             next_panel = active_panels[panel_idx]
-
+        logger.info(f"setting active focus to {next_panel}")
         self.toggled_panels.set_focus(next_panel)
 
     def keypress(self, key):
@@ -212,13 +212,16 @@ class CmonApp:
         if key in ('h', 'H'):
             self.help.visible = not self.help.visible
             if self.help.visible:
+
+                # we set the height at +2 to account for the line border at the top and bottom
                 self.loop.widget = urwid.Overlay(
                     self.help,
                     self.ui,
                     align=("relative", 50),
                     valign=("relative", 50),
                     width=("relative", 60),
-                    height=35, min_width=50, min_height=35)
+                    height=HelpInformation.page_height + 2,
+                    min_width=50)
             else:
                 # reset the main loop widget to remove the help overlay
                 self.loop.widget = self.ui

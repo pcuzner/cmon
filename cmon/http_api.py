@@ -1,5 +1,5 @@
 import requests
-import urllib3.exceptions
+import urllib3.exceptions  # type: ignore
 import logging
 
 from typing import Dict, Any
@@ -16,7 +16,8 @@ def get_mgr_data(url: str) -> requests.Response:
     except (requests.exceptions.ConnectionError, urllib3.exceptions.NewConnectionError, urllib3.exceptions.MaxRetryError):
         r = requests.Response()
         r.status_code = 500
-    logger.debug(f"GET request to {url} completed with status code:{r.status_code}, {len(r.text)} bytes returned")
+    logger.debug(
+        f"GET request to {url} completed with status code:{r.status_code}, {len(r.text)} bytes returned")
     return r
 
 
@@ -36,7 +37,8 @@ def get_prometheus_data(url: str, params: Dict[str, Any]) -> requests.Response:
     except (requests.exceptions.ConnectionError, urllib3.exceptions.NewConnectionError, urllib3.exceptions.MaxRetryError):
         r = requests.Response()
         r.status_code = 500
-    logger.debug(f"GET request to {url} completed with status code:{r.status_code}, {len(r.text)} bytes returned")
+    logger.debug(
+        f"GET request to {url} completed with status code:{r.status_code}, {len(r.text)} bytes returned")
     return r
 
 
@@ -47,7 +49,8 @@ def get_prometheus_alerts(url: str) -> requests.Response:
     except (requests.exceptions.ConnectionError, urllib3.exceptions.NewConnectionError, urllib3.exceptions.MaxRetryError):
         r = requests.Response()
         r.status_code = 500
-    logger.debug(f"GET request to {url} completed with status code:{r.status_code}, {len(r.text)} bytes returned")
+    logger.debug(
+        f"GET request to {url} completed with status code:{r.status_code}, {len(r.text)} bytes returned")
     return r
 
 

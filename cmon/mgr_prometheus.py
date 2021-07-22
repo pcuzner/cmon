@@ -28,7 +28,7 @@ class MetricInstance:
 
         self._metric_type = metric_type
         self.value = float(raw_str.split(' ')[-1])
-        self.delta = 0
+        self.delta: float = 0
         self.tstamp = tstamp
         labels = extract_labels(raw_str)
         if labels:
@@ -112,7 +112,7 @@ class Metric:
     # def prepare_update(self):
     #     self.instances_to_remove = self.values.keys()
 
-    def update(self, raw: str, tstamp: int, scrape_interval: int) -> None:
+    def update(self, raw: str, tstamp: int, scrape_interval: int) -> str:
         key = self._get_hash(raw)
         # if raw.startswith('ceph_pool_rd'):
         #     print(f"{key} from raw value {raw}")
@@ -131,7 +131,7 @@ class Metric:
 
         return self.values["singleton"].value
 
-    def dump_to_list(self, attr_name: Optional[str] = None) -> List[Dict[str, str]]:
+    def dump_to_list(self, attr_name: Optional[str] = None) -> Union[List[Dict[str, str]], List]:
         data = []
         for k in self.values:
             i = self.values[k]
@@ -166,7 +166,7 @@ class Metrics:
         self.mgr_endpoint = target_url
         self.consecutive_scrape_failures = 0
         self.max_failures = max_failures
-        self.tstamp: Optional[int] = None
+        self.tstamp: int
         self.scrape_interval = scrape_interval
 
     @property
@@ -215,7 +215,8 @@ class Metrics:
             return True
         else:
             # no data returned, unable to continue
-            logger.error(f"Unable to get latest data from mgr/prometheus endpoint at {self.mgr_endpoint}")
+            logger.error(
+                f"Unable to get latest data from mgr/prometheus endpoint at {self.mgr_endpoint}")
             return False
             # print("unable to build the initial metrics set. http request failed, check the log for the specific error message")
             # sys.exit(1)
@@ -243,12 +244,14 @@ class Metrics:
                     else:
                         metric_name = d.split(' ')[0]
                     if metric_name in self.data:
-                        instance_key = self.data[metric_name].update(d, self.tstamp, self.scrape_interval)
+                        instance_key = self.data[metric_name].update(
+                            d, self.tstamp, self.scrape_interval)
                         if metric_name not in seen_instances:
                             logger.debug(f"creating seen metric for {metric_name}")
                             seen_instances[metric_name] = {instance_key}
                         else:
-                            logger.debug(f"updating seen metric set for {metric_name} with instance id {instance_key}")
+                            logger.debug(
+                                f"updating seen metric set for {metric_name} with instance id {instance_key}")
                             seen_instances[metric_name].add(instance_key)
 
                         seen_metrics.add(metric_name)
@@ -264,12 +267,15 @@ class Metrics:
             self.prune_metrics(all_metrics.difference(seen_metrics))
             self.prune_instances(seen_instances)
         else:
-            logger.error(f"Unable to get latest data from mgr/prometheus endpoint at {self.mgr_endpoint}")
+            logger.error(
+                f"Unable to get latest data from mgr/prometheus endpoint at {self.mgr_endpoint}")
             # self.update_history(with_data=False)
             self.consecutive_scrape_failures += 1
             if self.consecutive_scrape_failures >= self.max_failures:
-                print(f"Terminating. {self.max_failures} scrapes from the mgr have failed. Unable to continue.")
-                logger.critical(f"Scrapes from {self.mgr_endpoint} have failed {self.max_failures} times. Terminating")
+                print(
+                    f"Terminating. {self.max_failures} scrapes from the mgr have failed. Unable to continue.")
+                logger.critical(
+                    f"Scrapes from {self.mgr_endpoint} have failed {self.max_failures} times. Terminating")
                 sys.exit(1)
 
     @timeit
@@ -285,7 +291,8 @@ class Metrics:
             if r.status_code == 500:
                 logger.error(f"Unable to reach/contact {self.mgr_endpoint}")
             else:
-                logger.error(f"HTTP request to {self.mgr_endpoint} failed with status: {r.status_code}")
+                logger.error(
+                    f"HTTP request to {self.mgr_endpoint} failed with status: {r.status_code}")
             return tstamp, None
 
     @timeit
@@ -302,7 +309,8 @@ class Metrics:
                 count_pruned_instances += len(deleted_instances)
                 for d in deleted_instances:
                     del m.values[d]
-        logger.info(f"instance pruning removed {count_pruned_instances} metric instances across {count_metrics_changed} metrics")
+        logger.info(
+            f"instance pruning removed {count_pruned_instances} metric instances across {count_metrics_changed} metrics")
 
     @timeit
     def prune_metrics(self, expired_metrics: Set[str]) -> None:
@@ -332,9 +340,10 @@ def label_match(metric_instance: Union[MetricInstance, Dict[str, str]], filter: 
     return True
 
 
-def count(metric: Union[Metric, List[Dict[str, str]]], filter: Optional[Filter] = None) -> int:
+def count(metric: Union[Metric, List[Dict[str, str]]], filter: Optional[Filter] = None) -> Optional[int]:
 
     def _count_metrics() -> int:
+        metric: Metric
         if not filter:
             return len(metric.values)
 
@@ -343,7 +352,7 @@ def count(metric: Union[Metric, List[Dict[str, str]]], filter: Optional[Filter] 
             i = metric.values[k]
             if filter.value:
                 logger.debug("checking value match")
-                if abs(i.value - filter.value) > 0.00001:
+                if abs(float(i.value) - filter.value) > 0.00001:
                     continue
             filter_keys = [k for k in filter.__dict__ if k != "value"]
             if filter_keys:
@@ -354,13 +363,14 @@ def count(metric: Union[Metric, List[Dict[str, str]]], filter: Optional[Filter] 
         return matches
 
     def _count_lists() -> int:
+        metric: List[Dict[str, str]]
         matches = 0
         if not filter:
             return len(metric)
         for i in metric:
             if filter.value:
                 logger.debug("checking value match")
-                if abs(i['value'] - filter.value) > 0.00001:
+                if abs(float(i['value']) - filter.value) > 0.00001:
                     continue
             filter_keys = [k for k in filter.__dict__ if k != "value"]
             if filter_keys:

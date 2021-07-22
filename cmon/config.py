@@ -1,4 +1,3 @@
-from argparse import ArgumentParser
 import os
 import sys
 import logging
@@ -21,7 +20,7 @@ class Config:
         "panel_rgws": False,
     }
 
-    def __init__(self, args: ArgumentParser):
+    def __init__(self, args):
         self.args = args
         self.ceph_url = Config.defaults['ceph_url']
         self.prometheus_url = Config.defaults['prometheus_url']

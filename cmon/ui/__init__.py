@@ -23,5 +23,6 @@ from .panels import (Inventory,  # noqa: F401
                      PoolInfo,
                      PGStatus,
                      RBDPerformance,
-                     IOGraphs
+                     IOGraphs,
+                     RGWPerformance,
                      )
