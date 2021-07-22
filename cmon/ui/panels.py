@@ -1,8 +1,8 @@
 
 import time
-import urwid
+import urwid  # type: ignore
 import logging
-import humanize
+import humanize  # type: ignore
 
 from typing import Dict, List, Any
 
@@ -143,7 +143,8 @@ class Capacity(CmonComponent):
                             (33, urwid.ProgressBar('pg normal', complete, percent_used, 100, smooth)),
                             urwid.Padding(
                                 # urwid.Text(f"{humanize.naturalsize(capacity_info['total_bytes'], binary=True).replace(' ', '')}", align='right'),
-                                urwid.Text(f"{humanize.naturalsize(capacity_info['total_bytes'], binary=True)}", align='right'),
+                                urwid.Text(
+                                    f"{humanize.naturalsize(capacity_info['total_bytes'], binary=True)}", align='right'),
                                 left=1, right=1
                             ),
                         ]),
@@ -155,7 +156,8 @@ class Capacity(CmonComponent):
                         urwid.Text(f"{capacity_info['compressed_pools_count']} pool(s)"),
                         urwid.Divider(),
                         urwid.Text('Total Savings'),
-                        urwid.Text(f"{humanize.naturalsize(capacity_info['compression_savings_bytes'], binary=True)}"),
+                        urwid.Text(
+                            f"{humanize.naturalsize(capacity_info['compression_savings_bytes'], binary=True)}"),
                         urwid.Divider()
                     ]),
                     left=1),
@@ -236,10 +238,10 @@ class PrometheusAlerts(CmonComponent):
         self.table_height = 4
         self.prometheus_url = parent.prometheus_url
         self.t_head = self._headings()
-        self.t_body = None
-        self.t_footer = None
+        self.t_body: MyListBox
+        self.t_footer: urwid.Text
         self.row = 1
-        self.table = None
+        self.table: urwid.Pile
         self.alert_data = []
         # self.widget = self._build_widget()
         super().__init__(visible=parent.config.panel_alerts)
@@ -262,7 +264,8 @@ class PrometheusAlerts(CmonComponent):
 
     def _build_rows(self, data):
         rows = []
-        sorted_alerts = sorted(data, key=lambda k: (k['labels']['severity'], k['labels']['alertname']))
+        sorted_alerts = sorted(data, key=lambda k: (
+            k['labels']['severity'], k['labels']['alertname']))
 
         for alert in sorted_alerts:
             alert_age = 'unknown'
@@ -284,7 +287,8 @@ class PrometheusAlerts(CmonComponent):
             rows.append(
                 urwid.AttrMap(
                     urwid.Columns([
-                        (self.column_names['severity'], urwid.Text((self.highlights[severity], f"{severity:^10} "))),
+                        (self.column_names['severity'], urwid.Text(
+                            (self.highlights[severity], f"{severity:^10} "))),
                         (self.column_names['state'], urwid.Text(state)),
                         (self.column_names['age'], urwid.Text(alert_age)),
                         (self.column_names['alertname'], urwid.Text(alertname)),
@@ -313,7 +317,8 @@ class PrometheusAlerts(CmonComponent):
     def _alerts_table(self):
         logger.info("fetching alert state")
         self.t_footer = urwid.Text("No alerts")
-        self.t_body = None
+        self.t_body = MyListBox(urwid.SimpleListWalker([]))
+
         self.alert_data = []
         r = get_prometheus_alerts(self.prometheus_url)
         if r.status_code == 200:
@@ -323,10 +328,11 @@ class PrometheusAlerts(CmonComponent):
                 self.t_body = self._build_body()
                 self.t_footer = urwid.Text(f"{self.row}/{len(self.alert_data)} alerts")
         elif r.status_code == 500:
-            self.t_footer = urwid.Text(('error', f'Unable to retrieve alerts from {self.prometheus_url}'))
+            self.t_footer = urwid.Text(
+                ('error', f'Unable to retrieve alerts from {self.prometheus_url}'))
 
         table_layout = [self.t_head]
-        if self.t_body:
+        if self.t_body.contents:
             table_layout.append(
                 urwid.BoxAdapter(self.t_body, height=self.table_height)
             )
@@ -368,29 +374,25 @@ class PrometheusAlerts(CmonComponent):
     def keypress(self, size, key):
         logger.debug("processing keypress in alerts table")
         if self.t_body:
+
             if key == 'up':
                 self._move('up')
-                # self.t_body.focus_previous()
             if key == 'down':
                 self._move('down')
-                # self.t_body.focus_next()
 
         self.parent.keypress(key)
 
     def mouse_event(self, size, event, button, col, row, wrow):
         # print(event) # "mouse press"
-        # print(button) # button no. 1-5, 1=left, 2=middle, 3=right, 4-wheepup, 5 wheel-down
+        # print(button) # button no. 1-5, 1=left, 2=middle, 3=right, 4-wheel-up, 5 wheel-down
         if event == 'mouse press':
+
             if button == 4:
                 # up
                 self._move('up')
-                # self.t_body.focus_previous()
-                # self._update_footer(self.table.get_focus_path()[1])
             elif button == 5:
                 # down
                 self._move('down')
-                # self.t_body.focus_next()
-                # self._update_footer(self.table.get_focus_path()[1])
 
     def update(self):
         logger.debug("in alerts update method")
@@ -402,7 +404,8 @@ class PrometheusAlerts(CmonComponent):
 
 class PoolInfo(CmonTable):
     title = 'Pool Details'
-    column_list = ['name', 'description', 'stored', 'used %', 'avail', 'PGs', 'compression', 'savings', 'IOPS', 'throughput', 'health']
+    column_list = ['name', 'description', 'stored', 'used %', 'avail',
+                   'PGs', 'compression', 'savings', 'IOPS', 'throughput', 'health']
 
     def __init__(self, parent):
         self.parent = parent
@@ -422,20 +425,6 @@ class PoolInfo(CmonTable):
             data=pool_data,
             msg=msg,
             description='pools')
-
-    def _build_widget(self):
-        self._build_table()
-        return urwid.Padding(
-            urwid.LineBox(
-                urwid.Padding(
-                    self.table,
-                    left=1,
-                    right=1
-                ),
-                title=self.title),
-            align='left',
-            width='pack'
-        )
 
 
 class PGStatus(CmonComponent):
@@ -486,7 +475,8 @@ class PGStatus(CmonComponent):
 class RBDPerformance(CmonTable):
 
     title = "RBD Performance (TOP 10)"
-    column_list = ['image', 'pool', 'namespace', 'read_ops', 'read_bytes', 'read_latency', 'write_ops', 'write_bytes', 'write_latency']
+    column_list = ['image', 'pool', 'namespace', 'read_ops', 'read_bytes',
+                   'read_latency', 'write_ops', 'write_bytes', 'write_latency']
 
     def __init__(self, parent):
         self.parent = parent
@@ -518,19 +508,6 @@ class RBDPerformance(CmonTable):
             data=sorted_rbd_data,
             msg=msg,
             description='rbd image(s)')
-
-    def _build_widget(self):
-        self._build_table()
-        return urwid.Padding(
-            urwid.LineBox(
-                urwid.Padding(
-                    self.table,
-                    left=1, right=1
-                ),
-                title=self.title),
-            align='left',
-            width='pack'
-        )
 
 
 class IOGraphs(CmonComponent):
@@ -569,10 +546,8 @@ class IOGraphs(CmonComponent):
                 return self._graphs_unavailable()
         else:
             return
-            # logger.info("hidden ioload panel")
-            # self.hide()
 
-    def _build_chart_data(self, raw_values) -> List[float]:
+    def _build_chart_data(self, raw_values) -> List[List[int]]:
         max_value = 0
         values = []
         colour_switch = False
@@ -598,16 +573,17 @@ class IOGraphs(CmonComponent):
         r = get_prometheus_data(self.prometheus_url, params=query)
 
         if r.status_code == 200:
+            self.prometheus_available = True
             js = r.json()
             results = js['data']['result']
             if results:
-                raw_data = js['data']['result'][0]['values']  # iops query is a summary, so only 1 list element
+                # iops query is a summary, so only 1 list element
+                raw_data = js['data']['result'][0]['values']
                 # raw_values is a list of timestamp, value pairs, so extract just the value
                 raw_values = [float(i[1]) for i in raw_data]
                 # data_values, max_value = self._build_chart_data(raw_values)
         elif r.status_code == 500:
             self.prometheus_available = False
-            # FIXME what else should be done here?
         else:
             # FIXME prometheus returned a strange code, what should be done?
             pass
@@ -622,61 +598,73 @@ class IOGraphs(CmonComponent):
         iops_data = self._fetch_prometheus_data(self.iops_query, window_start, window_end)
         # print(iops_data)
 
-        # FIXME work on the error state when prometheus drops during cmon queries
-        if self.prometheus_available and iops_data:
-            iops_data_fmtd = self._build_chart_data(iops_data)
-            iops_graph = self.bar_graph('blue')
-            y_axis = GraphScale(0, max(iops_data) or 1, unit='short')
-            iops_graph.set_data(iops_data_fmtd, y_axis.max)
-            iops_labels = urwid.GraphVScale(y_axis.labels, y_axis.max)
+        if self.prometheus_available:
+            if iops_data:
+                iops_data_fmtd = self._build_chart_data(iops_data)
+                iops_graph = self.bar_graph('blue')
+                y_axis = GraphScale(0, max(iops_data) or 1, unit='short')
+                iops_graph.set_data(iops_data_fmtd, y_axis.max)
+                iops_labels = urwid.GraphVScale(y_axis.labels, y_axis.max)
 
-            throughput_data = self._fetch_prometheus_data(self.throughput_query, window_start, window_end)
-            throughput_data_fmtd = self._build_chart_data(throughput_data)
-            throughput_graph = self.bar_graph(scheme='magenta')
-            y_axis = GraphScale(0, max(throughput_data) or 1, unit='dec-bytes')
-            throughput_graph.set_data(throughput_data_fmtd, y_axis.max)
+                throughput_data = self._fetch_prometheus_data(
+                    self.throughput_query, window_start, window_end)
+                throughput_data_fmtd = self._build_chart_data(throughput_data)
+                throughput_graph = self.bar_graph(scheme='magenta')
+                y_axis = GraphScale(0, max(throughput_data) or 1, unit='dec-bytes')
+                throughput_graph.set_data(throughput_data_fmtd, y_axis.max)
 
-            graph_labels = y_axis.labels
-            throughput_labels = urwid.GraphVScale(graph_labels, y_axis.max)
-            if ' ' in graph_labels[0][1]:
-                throughput_unit = f"{graph_labels[0][1].split(' ')[1]}/s"
+                graph_labels = y_axis.labels
+                throughput_labels = urwid.GraphVScale(graph_labels, y_axis.max)
+                if ' ' in graph_labels[0][1]:
+                    throughput_unit = f"{graph_labels[0][1].split(' ')[1]}/s"
+                else:
+                    throughput_unit = "B/s"
+
+                return urwid.Padding(
+                    urwid.LineBox(
+                        urwid.Pile([
+                            urwid.Text('IOPS'),
+                            urwid.Columns([
+                                (8, urwid.BoxAdapter(iops_labels, height=self.chart_height)),
+                                urwid.BoxAdapter(iops_graph, height=self.chart_height),
+                            ]),
+                            urwid.Divider(),
+                            urwid.Text(f"Throughput ({throughput_unit})"),
+                            urwid.Columns([
+                                (8, urwid.BoxAdapter(throughput_labels, height=self.chart_height)),
+                                urwid.BoxAdapter(throughput_graph, height=self.chart_height),
+                            ]),
+                        ]),
+                        title=self.title),
+                )
             else:
-                throughput_unit = "B/s"
-
-            return urwid.Padding(
-                urwid.LineBox(
-                    urwid.Pile([
-                        urwid.Text('IOPS'),
-                        urwid.Columns([
-                            (8, urwid.BoxAdapter(iops_labels, height=self.chart_height)),
-                            urwid.BoxAdapter(iops_graph, height=self.chart_height),
-                        ]),
-                        urwid.Divider(),
-                        urwid.Text(f"Throughput ({throughput_unit})"),
-                        urwid.Columns([
-                            (8, urwid.BoxAdapter(throughput_labels, height=self.chart_height)),
-                            urwid.BoxAdapter(throughput_graph, height=self.chart_height),
-                        ]),
-                    ]),
-                    title=self.title),
-            )
+                return \
+                    urwid.LineBox(
+                        urwid.Padding(
+                            urwid.Text(
+                                ('warning', "\nQuery to prometheus resulted in no data. Unable to show IO load Activity\n\n\n\n")),
+                            align='left', left=1
+                        ),
+                        title=self.title
+                    )
         else:
+            # prometheus endpoint is not reachable
             return \
                 urwid.LineBox(
                     urwid.Padding(
-                        urwid.Text(('warning', "\nQuery to prometheus resulted in no data. Unable to show IO load Activity\n\n\n\n")),
+                        urwid.Text(
+                            ('error', f"\nPrometheus endpoint @ {self.prometheus_url} is not responding\n")),
                         align='left', left=1
                     ),
                     title=self.title
                 )
 
-            pass
-
     def _graphs_unavailable(self):
         return \
             urwid.LineBox(
                 urwid.Padding(
-                    urwid.Text(('warning', "\nPrometheus url is needed to show IO load Activity\n\n\n\n")),
+                    urwid.Text(
+                        ('warning', "\nPrometheus url is needed to show IO load Activity\n\n\n\n")),
                     align='left', left=1
                 ),
                 title=self.title
@@ -706,18 +694,4 @@ class RGWPerformance(CmonTable):
             msg=msg,
             description='RGW instance(s)',
             col_spacing=3
-        )
-
-    def _build_widget(self):
-        self._build_table()
-        return urwid.Padding(
-            urwid.LineBox(
-                urwid.Padding(
-                    self.table,
-                    left=1,
-                    right=1
-                ),
-                title=self.title),
-            align='left',
-            width='pack'
         )
