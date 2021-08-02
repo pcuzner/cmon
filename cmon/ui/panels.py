@@ -5,8 +5,6 @@ import humanize  # type: ignore
 
 from typing import Dict, List, Any
 
-from urwid.widget import Divider
-
 from .common import (
     CmonComponent,
     CmonTable,
