@@ -25,4 +25,5 @@ from .panels import (Inventory,  # noqa: F401
                      RBDPerformance,
                      IOGraphs,
                      RGWPerformance,
+                     CephCLI,
                      )

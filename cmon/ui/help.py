@@ -63,6 +63,12 @@ class HelpInformation(CmonComponent):
                     "Show the performance data RGW instances"
                 )
             ]),
+            urwid.Columns([
+                (15, urwid.Text("c or C")),
+                urwid.Text(
+                    "Show a terminal window for Ceph CLI interaction"
+                )
+            ]),
             urwid.Divider(),
             urwid.Divider('_'),
             urwid.Divider(),

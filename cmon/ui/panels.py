@@ -1,10 +1,11 @@
-
 import time
 import urwid  # type: ignore
 import logging
 import humanize  # type: ignore
 
 from typing import Dict, List, Any
+
+from urwid.widget import Divider
 
 from .common import (
     CmonComponent,
@@ -695,3 +696,9 @@ class RGWPerformance(CmonTable):
             description='RGW instance(s)',
             col_spacing=3
         )
+
+
+class CephCLI(urwid.Terminal):
+
+    def __init__(self):
+        super().__init__(None, encoding='utf-8')
