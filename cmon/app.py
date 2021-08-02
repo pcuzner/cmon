@@ -1,6 +1,8 @@
 import urwid  # type: ignore
+import os
 import sys
 import time
+import shutil
 import logging
 
 from urllib.parse import urlparse
@@ -19,8 +21,10 @@ from .ui import (
     PGStatus,
     RBDPerformance,
     RefreshTimer,
-    RGWPerformance
+    RGWPerformance,
+    CephCLI
 )
+from typing import Union
 
 from .utils import timeit
 
@@ -86,6 +90,7 @@ class CmonApp:
         self.mgr_ip = self.config.ceph_url
         self.prometheus_url = self.config.prometheus_url or None
         self.metrics = metrics   # add the metrics object here!
+        self.term_problems = []
 
         self.panels = [
             'inventory',
@@ -126,7 +131,32 @@ class CmonApp:
             self.rgw_performance,
         ])
 
+        self.term: Union[None, CephCLI]
+        self._check_term_available()
+        if self.term_usable:
+            self.term = CephCLI()
+        else:
+            self.term = None
+
         self.ptr = 0
+
+    @property
+    def term_usable(self):
+        return len(self.term_problems) == 0
+
+    def _check_term_available(self) -> None:
+        file_list = ['/etc/ceph/ceph.conf', '/etc/ceph/ceph.client.admin.keyring']
+        for f in file_list:
+            if not os.path.exists(f):
+                self.term_problems.append('file {f} does not exist')
+
+        if not shutil.which('ceph'):
+            self.term_problems.append('ceph binary can not be found. Is ceph-common installed?')
+
+        if self.term_problems:
+            logger.warning("Integrated CLI feature is unavailable")
+            for p in self.term_problems:
+                logger.warning(f"- {p}")
 
     def _build_ui(self):
 
@@ -208,7 +238,7 @@ class CmonApp:
     def keypress(self, key):
         if key in ('q', 'Q'):
             raise urwid.ExitMainLoop()
-
+        logger.info(key)
         if key in ('h', 'H'):
             self.help.visible = not self.help.visible
             if self.help.visible:
@@ -223,10 +253,29 @@ class CmonApp:
                     height=HelpInformation.page_height + 2,
                     min_width=50)
             else:
-                # reset the main loop widget to remove the help overlay
                 self.loop.widget = self.ui
 
         if not self.help.visible:
+
+            if key in ('c', 'C'):
+                if self.term_usable:
+                    self.term = CephCLI()
+                    shell = urwid.LineBox(
+                        urwid.Pile([
+                            ('weight', 70, self.term)
+                        ]),
+                        title="Ceph CLI"
+                    )
+                    urwid.connect_signal(self.term, 'closed', self.close_term)
+                    shell.main_loop = self.loop
+                    self.loop.widget = urwid.Overlay(
+                        shell,
+                        self.ui,
+                        align=('relative', 50),
+                        valign=("relative", 50),
+                        width=('relative', 90),
+                        height=40,
+                    )
 
             if key in ('p', 'P'):
                 self._manage_panels(self.pool_info)
@@ -246,6 +295,11 @@ class CmonApp:
             elif key == 'tab':
                 logger.info("main loop processing a tab keypress")
                 self._switch_panel()
+
+    def close_term(self, *args, **kwargs):
+        urwid.disconnect_signal(self.term, 'closed', self.close_term)
+        # self.shell_visible = False
+        self.loop.widget = self.ui
 
     @timeit
     def _update_panels(self):
