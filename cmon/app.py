@@ -257,26 +257,25 @@ class CmonApp:
 
         if not self.help.visible:
 
-            if key in ('c', 'C'):
-                if self.term_usable:
-                    self.term = CephCLI()
-                    width = 70 if key == 'c' else 99
-                    shell = urwid.LineBox(
-                        urwid.Pile([
-                            ('weight', 70, self.term)
-                        ]),
-                        title="Ceph CLI"
-                    )
-                    urwid.connect_signal(self.term, 'closed', self.close_term)
-                    shell.main_loop = self.loop
-                    self.loop.widget = urwid.Overlay(
-                        shell,
-                        self.ui,
-                        align=('relative', 50),
-                        valign=("relative", 50),
-                        width=('relative', width),
-                        height=40,
-                    )
+            if key in ('c', 'C') and self.term_usable:
+                self.term = CephCLI()
+                width = 70 if key == 'c' else 99
+                shell = urwid.LineBox(
+                    urwid.Pile([
+                        ('weight', 70, self.term)
+                    ]),
+                    title="Ceph CLI"
+                )
+                urwid.connect_signal(self.term, 'closed', self.close_term)
+                shell.main_loop = self.loop
+                self.loop.widget = urwid.Overlay(
+                    shell,
+                    self.ui,
+                    align=('relative', 50),
+                    valign=("relative", 50),
+                    width=('relative', width),
+                    height=40,
+                )
 
             if key in ('p', 'P'):
                 self._manage_panels(self.pool_info)
