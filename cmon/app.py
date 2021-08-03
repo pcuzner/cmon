@@ -260,6 +260,7 @@ class CmonApp:
             if key in ('c', 'C'):
                 if self.term_usable:
                     self.term = CephCLI()
+                    width = 70 if key == 'c' else 99
                     shell = urwid.LineBox(
                         urwid.Pile([
                             ('weight', 70, self.term)
@@ -273,7 +274,7 @@ class CmonApp:
                         self.ui,
                         align=('relative', 50),
                         valign=("relative", 50),
-                        width=('relative', 90),
+                        width=('relative', width),
                         height=40,
                     )
 
