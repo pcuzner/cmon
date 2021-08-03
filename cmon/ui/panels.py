@@ -699,4 +699,4 @@ class RGWPerformance(CmonTable):
 class CephCLI(urwid.Terminal):
 
     def __init__(self):
-        super().__init__(None, encoding='utf-8')
+        super().__init__(['/bin/ash'], encoding='utf-8')
