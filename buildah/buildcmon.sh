@@ -8,7 +8,7 @@
 # this allows you to use the container with parameters like this cmon -a or cmon -a -i
 #
 # with the ceph cli integration
-# alias cmon='podman run --interactive --tty --net=host -v /home/paul/etc_ceph:/etc/ceph:ro,z -e TERM -e CEPH_URL=http://192.168.122.92:9283/metrics -e PROMETHEUS_URL=http://192.168.122.92:9095 --entrypoint='\''/cmon.py'\'' localhost/cmon:devel'
+# alias cmon='podman run --interactive --tty --net=host -v /home/paul/etc_ceph:/etc/ceph:ro,z -e CEPH_URL=http://192.168.122.92:9283/metrics -e PROMETHEUS_URL=http://192.168.122.92:9095 --entrypoint='\''/cmon.py'\'' localhost/cmon:devel'
 #
 if [ ! -z "$1" ]; then
   TAG=$1
@@ -21,7 +21,6 @@ echo "Build Alpine Linux image with the tag: $TAG"
 IMAGE="alpine:edge"
 
 container=$(buildah from $IMAGE)
-buildah run $container apk add bash
 buildah run $container apk add python3
 buildah run $container apk add py3-yaml
 buildah run $container apk add py3-requests
@@ -41,6 +40,9 @@ buildah run $container chmod ug+x /cmon.py
 #buildah config --entrypoint "/usr/bin/python3 /cmon.py" $container
 
 # finalize
+buildah config --env PS1="[cmon] \w\$ " $container
+buildah config --env TERM="xterm-256color" $container
+
 buildah config --label maintainer="Paul Cuzner <pcuzner@redhat.com>" $container
 buildah config --label description="cmon ceph monitor applicaion" $container
 buildah config --label summary="CLI based ceph monitoring application" $container
