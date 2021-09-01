@@ -35,10 +35,11 @@ The idea around the tool is to provide a quick and easy dashboard for a Ceph clu
 - inventory overview and overall ceph daemon state
 - IO load graph (IOPS and throughput) sourced from Prometheus
 - currently active alerts, also sourced from Prometheus
-- capacity status, with compression yield
+- capacity status, with compression savings
 - pool configuration, capacity and performance breakdown
 - top 10 rbd's by IOPS (needs rbd_stats_pools option set in mgr/prometheus)
 - RGW performance, per instance (GETs/PUTs and bandwidth)
+- optional integrated CLI (requires a conf and keyring to be passed through)
 &nbsp;
 
 ## Installation
@@ -119,6 +120,19 @@ Here's an example that picks up mgr and prometheus from 192.168.122.92
 alias cmon="podman run --interactive --tty --net=host -e TERM -e CEPH_URL=http://192.168.122.92:9283/metrics -e PROMETHEUS_URL=http://192.168.122.92:9095 --entrypoint='/cmon.py' pcuzner/cmon:latest"
 ```
 
+If you wish to use the integrated CLI feature, you must pass through a directory containing the relevant ```conf``` and ```keyring``` files. For example:
+```
+alias cmon="podman run --interactive --tty --net=host -e TERM -e CEPH_URL=http://192.168.122.92:9283/metrics -e PROMETHEUS_URL=http://192.168.122.92:9095 -v /root/etc_ceph:/etc/ceph:ro,z --entrypoint='/cmon.py' pcuzner/cmon:latest"
+```
+
+This example binds the contents of the root users etc_ceph directory to the containers /etc/ceph directory to enable the ceph command line tools to reach out to the ceph cluster. Your local version of ceph configuration directory must contain files called
+* ```ceph.conf```
+* ```ceph.keyring```
+
+The container will check for the presence of these files automatically during cmon startup, with any issues being flagged in the ```cmon.log``` file.
+
+
+
 ### Container
 The smallest container image for cmon is based on Alpine, but the buildah folder contains scripts to build cmon for other base images.
 
@@ -133,13 +147,14 @@ Here's a comparison of the images sizes<sup>1</sup>
 <sup>1</sup> You can probably shrink the RH/CentOS/Ubuntu images with more work - this is just 'out-of-the-box' sizings.
 
 ## Troubleshooting
-1. *"cmon fails to start. I get 'Unable to build the metrics from mgr/prometheus...'"*
+1. *"cmon fails to start. I get 'Unable to build the metrics from mgr/prometheus...'"*  
    cmon relies on the mgr/prometheus module - is it enabled? ```ceph mgr module ls``` to check, and ```ceph mgr module enable prometheus``` to enable.
-1. *"My graphs show a saw-tooth pattern with workload appearing to stop every few seconds...what's that about?"*
+2. *"My graphs show a saw-tooth pattern with workload appearing to stop every few seconds...what's that about?"*  
   Check your refresh-interval is correct - this pattern of regular lapses in data is normally when you're refresh-interval is smaller than the interval used in mgr/prometheus and the prometheus scrape job.
-2. *"My IO load panel just says prometheus returned no data, what do I do?"*
+3. *"My IO load panel just says prometheus returned no data, what do I do?"*  
    This indicates that the mgr/prometheus endpoint is not being scraped, so there is no ceph_* related metrics for the query to return. Check that port 9283 on the mgr is listening, and that the prometheus configuration has a job to scrape from ceph configured correctly (IP/hostname and port are correct?)
-
+4. *"I've configued a local ceph directory, but the cli command integration is not working"*  
+   To see what cmon has detected during startup, you need to look at the cmon.log file. You can either exec into the running container, or add another volume binding definition to your cmon command to expose cmon.log on your local machine to the container.  
 
 ## Known Issues
 1. The widgets in the UI require a minimum width. If you resize your console window to be too small, the app will shutdown since it's no longer able to display content.
