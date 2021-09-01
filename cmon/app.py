@@ -145,10 +145,10 @@ class CmonApp:
         return len(self.term_problems) == 0
 
     def _check_term_available(self) -> None:
-        file_list = ['/etc/ceph/ceph.conf', '/etc/ceph/ceph.client.admin.keyring']
+        file_list = ['/etc/ceph/ceph.conf', '/etc/ceph/ceph.keyring']
         for f in file_list:
             if not os.path.exists(f):
-                self.term_problems.append('file {f} does not exist')
+                self.term_problems.append(f"file {f} does not exist")
 
         if not shutil.which('ceph'):
             self.term_problems.append('ceph binary can not be found. Is ceph-common installed?')
