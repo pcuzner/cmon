@@ -42,7 +42,7 @@ class HelpInformation(CmonComponent):
             urwid.Columns([
                 (15, urwid.Text("i or I")),
                 urwid.Text(
-                    "Show the IO load from the last 10 minutes of the cluster in terms of "
+                    "Show the IO load from the last 15 minutes of the cluster in terms of "
                     "IOPS and throughput, using data sourced from Promethues")
             ]),
             urwid.Columns([
