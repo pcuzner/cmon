@@ -185,6 +185,9 @@ class IOPS(SingleStat):
 
     def _format(self):
         total_iops = get_total_iops(self.metrics)
+        # bounce any rogue stats back to the positive scale
+        if total_iops < 0:
+            total_iops *= -1
         return str(int(total_iops))
 
 
