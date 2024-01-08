@@ -203,17 +203,17 @@ def get_capacity_info(metrics: Metrics) -> Dict[str, float]:
     total_disks = 0
     hostdisk = set()
 
-    if disks:
-        for d in disks:
-            osd_disks = d.get('devices', None)
-            if osd_disks:
-                # Octopus / Pacific onwards
-                for dev in osd_disks.split(','):
-                    hostdisk.add(f"{d['instance']}-{dev}")
-            else:
-                # Nautilus just count the primary devices
-                hostdisk.add(f"{d['instance']}-{d['device']}")
-        total_disks = len(hostdisk)
+    for d in disks:
+        osd_disks = d.get('device_ids', '')
+        if osd_disks:
+            # Octopus / Pacific onwards
+            for dev_name in osd_disks.split(','):
+                _, name = dev_name.split('=')
+                hostdisk.add(f"{d['instance']}-{name}")
+        else:
+            # Nautilus just count the primary devices for now
+            hostdisk.add(f"{d['instance']}-{d['device']}")
+    total_disks = len(hostdisk)
 
     compressed_pools_count = 0
     compress_under_bytes = 0
