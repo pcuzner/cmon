@@ -401,7 +401,8 @@ class PrometheusAlerts(CmonComponent):
         current_focus = self.table.get_focus_path()
         self.original_widget = self._build_widget()
         self.table.set_focus_path(current_focus)
-        self._update_footer(current_focus[1])
+        if self.alert_data:
+            self._update_footer(current_focus[1])
 
 
 class PoolInfo(CmonTable):
