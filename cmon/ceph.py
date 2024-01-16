@@ -132,9 +132,12 @@ def get_inventory(metrics: Metrics) -> Dict[str, Any]:
                 daemon_lookup[daemon_type] = {}
             version_text = daemon.get('ceph_version', '')
             if version_text:
-                # ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)
-                vers = version_text.split(' ')
-                vers_id = vers[2].split('.')[0]  # 16
+                # core daemons report version like this - 
+                #       ceph_version="ceph version 16.1.0-752-g98cc35e1 (98cc35e129ac9d1966d4063b83706ac954f3a6ed) pacific (rc)"
+                # ceph-exporter reports version like this - 
+                #       ceph_version="18.2.0-1252-g6a0590bd"
+                vers = version_text.replace('ceph version ', '')
+                vers_id = vers.split('.')[0]  # 16
                 d = daemon_lookup[daemon_type]
                 if vers_id in d:
                     d[vers_id] = d[vers_id] + 1
