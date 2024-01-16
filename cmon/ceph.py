@@ -371,6 +371,11 @@ def get_rbd_performance(metrics: Metrics) -> List[Dict[str, Any]]:
 
 
 def get_rgw_performance(metrics: Metrics) -> List[Dict[str, Any]]:
+    """Return RGW performance data extracted from the mgr/prometheus metrics
+    
+    Note that in environments that have ceph-exporter the rgw performance data is no
+    longer returned by mgr/prometheus and must be queried from the Prometheus server.
+    """
 
     base_list = fetch_metric_list(metrics, 'ceph_rgw_metadata')
     updates = []
@@ -384,10 +389,10 @@ def get_rgw_performance(metrics: Metrics) -> List[Dict[str, Any]]:
         base_list=base_list, updates=updates, key_names=['ceph_daemon'])
     for gw in rgw_data:
         gw.update({
-            "get_throughput": humanize.naturalsize(gw['get_b']),
-            "put_throughput": humanize.naturalsize(gw['put_b']),
-            "gets": str(int(gw['gets'])),
-            "puts": str(int(gw['puts'])),
+            "get_throughput": humanize.naturalsize(gw.get('get_b', 0)),
+            "put_throughput": humanize.naturalsize(gw.get('put_b', 0)),
+            "gets": str(int(gw.get('gets', 0))),
+            "puts": str(int(gw.get('puts', 0))),
         })
 
     return rgw_data
